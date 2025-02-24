@@ -1,1 +1,0 @@
-156p_negacion

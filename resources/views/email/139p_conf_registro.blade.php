@@ -1,1 +1,0 @@
-Confirmación de registro del periodo (HTML)

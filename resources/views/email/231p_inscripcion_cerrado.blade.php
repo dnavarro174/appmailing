@@ -1,2 +1,0 @@
-8. PANTALLAZO EVENTO CERRADO
-Evento Cerrado (HTML)

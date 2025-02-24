@@ -1,1 +1,0 @@
-inscripciones cerradas

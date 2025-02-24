@@ -1,1 +1,0 @@
-Pantallazo final Preinscripción (HTML) Virtual

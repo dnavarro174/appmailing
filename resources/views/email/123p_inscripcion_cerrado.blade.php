@@ -1,1 +1,0 @@
-Gracias por su inscripción. El link de acceso a la reunión es el siguiente: https://enc-edu.zoom.us/j/85926650408?pwd=TnJGWVlOU1NFQ3MyQTZwTzkwVWpvdz09

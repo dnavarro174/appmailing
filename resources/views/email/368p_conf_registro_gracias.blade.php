@@ -1,1 +1,0 @@
-se registro correctamente

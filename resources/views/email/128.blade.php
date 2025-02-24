@@ -1,1 +1,0 @@
-128p_conf_registro

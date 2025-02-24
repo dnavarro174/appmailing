@@ -1,2 +1,0 @@
-7. PANTALLAZO PREINSCRIPCIONES CERRADAS
-Preinscripciones Cerradas (HTML)

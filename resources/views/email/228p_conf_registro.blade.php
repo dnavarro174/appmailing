@@ -1,1 +1,0 @@
-Confirmación de registro, actividad y gafete (HTML) Presencial 3

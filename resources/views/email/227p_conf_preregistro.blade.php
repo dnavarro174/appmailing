@@ -1,1 +1,0 @@
-Mailing de Confirmación (HTML) [Presencial]

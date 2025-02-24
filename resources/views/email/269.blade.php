@@ -1,1 +1,0 @@
-269p_conf_registro

@@ -1,1 +1,0 @@
-Vacantes agotadas

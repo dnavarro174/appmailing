@@ -1,1 +1,0 @@
-Evento cerrado

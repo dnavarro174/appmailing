@@ -1,1 +1,0 @@
-Baja de Evento Pantallazo (HTML)

@@ -1,1 +1,0 @@
-170p_negacion

@@ -1,1 +1,0 @@
-Confirmación Pre-Registro (HTML) aaaaa bbbb

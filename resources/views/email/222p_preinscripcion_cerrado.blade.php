@@ -1,1 +1,0 @@
-Asunto Baja de Evento

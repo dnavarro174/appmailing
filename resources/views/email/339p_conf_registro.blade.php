@@ -1,1 +1,0 @@
-Su proceso de registro al Proceso de Admisión de la MCG 2024 ha sido exitoso.

@@ -1,1 +1,0 @@
-223p_negacion

@@ -1,1 +1,0 @@
-12p_negacion

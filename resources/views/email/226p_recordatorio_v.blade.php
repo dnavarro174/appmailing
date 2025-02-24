@@ -1,1 +1,0 @@
-Mailing Recordatorio (HTML) [Virtual]

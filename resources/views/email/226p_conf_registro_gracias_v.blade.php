@@ -1,1 +1,0 @@
-Pantallazo confirmación al finalizar el registro [Virtual]
