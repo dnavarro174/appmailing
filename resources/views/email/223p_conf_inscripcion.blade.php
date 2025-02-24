@@ -1,0 +1,2 @@
+usuario: {{$nombres}}
+contraseña: {{$nombres}}

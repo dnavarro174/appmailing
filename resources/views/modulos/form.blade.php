@@ -1,0 +1,1389 @@
+@extends('layout.home')
+
+@section('content')
+    <div class="container-scroller">
+        <!-- partial:partials/_navbar.html -->
+
+        @include('layout.nav_superior')
+        <!-- end encabezado -->
+        <!-- partial -->
+        <div class="container-fluid page-body-wrapper">
+
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    <div class="row justify-content-center">
+                        <div class="col-md-9 grid-margin stretch-card">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title text-transform-none">Nuevo Modulo</h4>
+
+                                    <form class="forms-sample pr-4 pl-4" action="{{ route('modulos.store') }}" method="post" id="formModulos">
+                                        {!! csrf_field() !!}
+                                        <input type="hidden" name="id" value="{{ old('id', $data["id"], 0) }}" id="inpid">
+                                        <input type="hidden" id="datar" name="datar">
+                                        <input type="hidden" id="datai" name="datai">
+                                        <div class="form-group row">
+                                            <label for="name" class="col-sm-2 col-form-label d-block">Evento <span class="text-danger">*</span></label>
+                                            <div class="col-sm-10">
+                                                <input type="text" required="" class="form-control" name="name" id="name" placeholder="Nombre del modulo *" value="{{ old('name', $data["name"]) }}" minlength="10" />
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="description" class="col-sm-2 col-form-label d-block">Descripción</label>
+                                            <div class="col-sm-10">
+                                                <textarea placeholder="Descripción" class="form-control" name="description" id="description" cols="30" rows="5">{{ old('description', $data['description']) }}</textarea>
+                                                <div class="col alert alert-light border-0 mb-0 text-right">
+                                                    5,000 caracteres
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-sm-12 text-center mt-4">
+                                                <button id="actionSubmit" value="Guardar" type="submit" class="btn btn-dark mr-2">Grabar</button>
+                                                <a href="{{ route('modulos.index') }}" class="btn btn-light">Volver al listado</a>
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="stretch-card">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                    <h4 class="card-title col-sm-12 col-md-6">Formulario</h4>
+                                                        @if(count($m_categories)>0)
+                                                            <select class="col-sm-12 col-md-6" id="m_category_id">
+                                                                <option value="" disabled selected>Copiar campos desde...</option>
+                                                                @foreach($m_categories as $id =>$name)
+                                                                    <option value="{{ $id }}">{{$name}}</option>
+                                                                @endforeach
+
+                                                            </select>
+                                                        @endif
+                                                    </div>
+                                                    <ul class="nav nav-tabs tab-solid tab-solid-danger" role="tablist">
+                                                        <li class="nav-item">
+                                                            <a class="nav-link active" id="tab-5-1" data-toggle="tab" href="#home-5-1" role="tab" aria-controls="home-5-1" aria-selected="true">Encabezado de Formulario</a>
+                                                        </li>
+                                                        <li class="nav-item">
+                                                            <a class="nav-link" id="tab-5-2" data-toggle="tab" href="#profile-5-2" role="tab" aria-controls="profile-5-2" aria-selected="false">Campos de Formulario</a>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="tab-content tab-content-solid">
+                                                        <div class="tab-pane fade active show" id="home-5-1" role="tabpanel" aria-labelledby="tab-5-1">
+
+                                                            <div class="pb-1 flex text-right mb-2">
+{{--                                                                <h3>CAMPOS DE ENCABEZADO DE FORMULARIO</h3>--}}
+                                                                <button type="button" class="btn btn-primary add-field btn-sm" data-toggle="modal" data-target="#ModalForm" id="btnModal" data-is-detail="0">
+                                                                    <i class="mdi mdi-plus"></i> Nuevo Campo
+                                                                </button>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col text-right pb-2">
+                                                                    <div class="custom-control custom-checkbox">
+                                                                        <input type="checkbox" class="custom-control-input" id="chkAll">
+                                                                        <label class="custom-control-label" for="chkAll">Todos los campos</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div id="inputs" class="pr-2"></div>
+
+                                                        </div>
+                                                        <div class="tab-pane fade" id="profile-5-2" role="tabpanel" aria-labelledby="tab-5-2">
+
+                                                            <div class="pb-1 flex text-right mb-2">
+{{--                                                                <h3>CAMPOS DE DETALLE DE FORMULARIO</h3>--}}
+                                                                <button type="button" class="btn btn-primary add-field btn-sm" data-toggle="modal" data-target="#ModalForm" id="btnModal" data-is-detail="1">
+                                                                    <i class="mdi mdi-plus"></i> Nuevo Campo
+                                                                </button>
+                                                            </div>
+                                                            <div id="inputs2" class="row"></div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row">
+                                            <div class="col-6">
+
+                                            </div>
+                                            <div class="col-6">
+
+                                            </div>
+                                        </div>
+
+                                        <div>
+
+                                        </div>
+
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @include('email.view_html.view_html')
+                </div>
+
+
+                <!-- content-wrapper ends -->
+                <!-- partial:partials/_footer.html -->
+                @include('layout.footer')
+                <!-- end footer.php -->
+                <!-- partial -->
+            </div>
+            <!-- main-panel ends -->
+        </div>
+        <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+
+@include('modulos.form-modal')
+
+@endsection
+@push('css')
+    <style>
+        .hidden_email, .hidden_whatsapp{display: none;}
+        #inputs >div, #inputs2 >div{
+            padding: 3px 2px 5px 1px !important;
+        }
+        .ghostClass, #inputs >div:hover, #inputs2 >div:hover{
+            background-color: rgba(15, 176, 255, 0.2);
+            /*padding: 5px 2px;*/
+        }
+        .ghostClass{
+            opacity: 0.7;
+        }
+        input.largerCheckbox {
+            width: 25px;
+            height: 25px;
+        }
+        input[type=checkbox] {
+            margin-top: 0;
+            vertical-align: middle;
+        }
+        .modal-body{
+            max-height: calc(100vh - 200px);
+            overflow-y: auto;
+        }
+
+        e-relative {
+            white-space: nowrap;
+            position: relative;
+        }
+        .right-icon-pos {
+            position: absolute;
+            right: 15px;
+        }
+        .left-icon-pos {
+            position: absolute;
+            left: 5px;
+        }
+        .f-input, .t-field, .t-question {
+            cursor: move;
+        }
+        .t-field {
+            margin: 1px 2px;
+        }
+
+        .ghostClass{
+
+        }
+
+    </style>
+@endpush
+
+@section('scripts')
+
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-sortablejs@latest/jquery-sortable.js"></script>
+
+    <!-- include summernote css/js -->
+
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/lang/summernote-es-ES.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/i18n/es.js"></script>
+
+    <script>
+
+        //        $opts = ["Manual", "Tipo de documento", "Grupo","Pais", "Departamento","Provincia","Correos","Dominios"];
+
+        // var tabID = sessionStorage.tabID &&
+        // sessionStorage.closedLastTab !== '2' ?
+        //     sessionStorage.tabID :
+        //     sessionStorage.tabID = Math.random();
+        // sessionStorage.closedLastTab = '2';
+        // $(window).on('unload beforeunload', function() {
+        //     sessionStorage.closedLastTab = '1';
+        // });
+        // console.log(sessionStorage);
+        var inp_index = 0;
+
+        var data = []
+        var $inputs, $inputs2, $btnModal, $cbfields, $fopt, $fvselect;
+        var recs = [];
+        var ins = [];
+        var type_id_old = 0
+        var doctypes = [], groups = [], countries = [], departments = [], provinces = [], emails = [], domains = [];
+
+        var $ftext, $ftexts, $fselect, $flatRadios1, $flatRadios2, $btnAddField2;
+        var $fMaxlength, $fPlaceholder, $fEditor, $fMin, $fMax, $fStep, $fDominio, $fGrupo, $fFormato;
+        var $fCond, $fEfecto, $campos2, $fAccept, $fSize, $fcampos;
+        var $fExp, $fMinE, $fMaxE, $fCountE;
+        var $chkPermite;
+        var indexlel = 1;
+        var oinputs = {};
+        var oidputs = {};
+        var $m_category_id;
+        var $chkAll, $btnChange, $btnRemoveField;
+        var chkAllIds = [1, 3,4,5,6,9];
+        var $fvalue, $fvalue2, $fvalue3;
+        var fvalues = ["fvalue", "fvalue2", "fvalue3"];
+        var iii = 0;
+
+        $('document').ready(function(){
+            //$.fn.select2.defaults.set('language', 'es');
+            var select2_opts = {
+                language: "es"
+            };
+
+            $inputs = $("#inputs");
+            $inputs2 = $("#inputs2");
+            $btnModal = $("#btnModal");
+            $cbfields = $("#cbfields");
+            $fvselect = $("#fvselect");
+            $fopt = $("#fopt");
+
+            $ftext = $(".f-text");
+            $ftexts = $(".f-text>div");
+            $fselect = $(".f-select");
+            $flatRadios1 = $("#flatRadios1");
+            $flatRadios2 = $("#flatRadios2");
+            $btnAddField2 = $("#btnAddField2");
+
+            $fMaxlength = $("#fMaxlength");
+            $fPlaceholder = $("#fPlaceholder");
+            $fEditor = $("#fEditor");
+            $fMin = $("#fMin");
+            $fMax = $("#fMax");
+            $fStep = $("#fStep");
+            $fDominio = $("#fDominio");
+            $fGrupo = $("#fGrupo");
+            $fFormato = $("#fFormato");
+            $fAccept = $("#fAccept");
+            $fSize = $("#fSize");
+            $fEfecto = $("#fEfecto");
+            $fCond = $("#fCond");
+            $campos2 = $("#campos2");
+            $fcampos = $("#fcampos");
+            $m_category_id = $("#m_category_id");
+            $chkAll = $("#chkAll");
+            $btnChange = $("#btnChange");
+            $btnRemoveField = $("#btnRemoveField");
+            $fvalue = $("#fvalue");
+            $fvalue2 = $("#fvalue2");
+            $fvalue3 = $("#fvalue3");
+
+            $fExp = $("#fExp");
+            $fMinE = $("#fMinE");
+            $fMaxE = $("#fMaxE");
+            $fCountE = $("#fCountE");
+            $chkPermite = $("#chkPermite");
+
+            if($m_category_id){
+                $m_category_id.on('change', inicia)
+            }
+
+            $chkAll.on("click", selectAll);
+
+            $fopt.on("change", function(){
+                getVisibleValue(parseInt($("#ftype").val()));
+            });
+
+            $("#btnEliminar").on('click', function(){
+                var index = parseInt($("#findex").val());
+                var is_detail = $("#is_detail").val() == 1;
+                var $sel = is_detail?$inputs2:$inputs;
+                if (is_detail )
+                    ins.splice(index,1);
+                else
+                    recs.splice(index,1);
+                $sel.children("div").eq(index).remove();
+                $('#ModalForm').modal('toggle');
+            });
+
+            function seleccionChkPermite(){
+                $('.chk-ft :checkbox').attr("disabled", !$chkPermite.prop("checked"));
+            }
+
+            $chkPermite.on('click', seleccionChkPermite);
+
+            $("#formField").on("submit",function(e){
+                var index = parseInt($("#findex").val());
+                var is_detail = parseInt($("#is_detail").val()) == 1 ?1:0;
+                var d = is_detail?ins:recs;
+
+                var position = parseInt($("#fposition").val());
+
+                if(0&&getExistsPosition(d, position)){
+                    swal("Advertencia", "La posicion existe", "warning").then(function() {
+                        swal.close();
+                        $("#fposition").focus().select();
+                    });
+                    return;
+                }
+                index = parseInt($("#findex").val());
+                var $inp = is_detail !=1 ?$inputs:$inputs2;
+
+                var m_field_id = parseInt( $("#ftype").val() || "0");
+
+                var opt = {
+                    "id": parseInt($("#fid").val() || "0"),
+                    "name": $("#fname").val(),
+                    "title": $("#ftitle").val(),
+                    "subtitle":  $('#fsubtitle').summernote('code'),//$("#fsubtitle").val(),
+                    "value": getFValue(),
+                    "note": $('#fnote').summernote('code'),//$("#fnote").val(),
+                    "m_field_id": m_field_id,
+                    //"m_attr_id": parseInt($("#ffield option:selected").attr("value") || "0"),//$("#ffield").val(),
+                    "m_attr_id": parseInt($("#ffield").val() ||0),//$("#ffield").val(),
+                    "required": $("#frequired").prop("checked")?1:0,
+                    "visible": $("#fvisible").prop("checked")?1:0,
+                    "opt": JSON.stringify(generateOpt()),
+                    "is_title_hidden": $("#f_is_title_hidden").prop("checked")?1:0,
+                    "is_fullsize": $("#f_is_fullsize").prop("checked")?1:0,
+
+                }
+                console.log("SALIENDO", opt);
+                var val = $("#campos2").val();
+                // if(verifyCValue(d, index, "name", $("#fname").val())){
+                //     swal("Advertencia", "El nombre existe", "warning").then(function() {
+                //         swal.close();
+                //         $("#fposition").focus().select();
+                //     });
+                //     return false;
+                // }
+                if(verifyCValue(d, index, "title", $("#ftitle").val())){
+                    swal("Advertencia", "El titulo existe", "warning").then(function() {
+                        swal.close();
+                        $("#fposition").focus().select();
+                    });
+                    return false;
+                }
+                if (index==-1){
+                    opt.id = 0;
+                    opt.is_detail = is_detail;//ADDED
+                    //$inp.append($(getText(opt)));
+                    $inp.append(generateInputHML(opt, 0, -1));
+                    index = d.length;
+                    //d.//ADDED
+                    setValueD(d, index);
+                }else{
+                    opt.id = parseInt(opt.id);
+                    opt.is_detail = is_detail;
+                    var tag = parseInt($($inp.children()[index]).attr("tag"));
+                    $($inp.children()[index]).replaceWith(generateInputHML(opt, opt.id, tag));//$(getText(opt))
+                    loadCombo($("#inp-"+opt.id), opt);
+                }
+                setPickers();
+                setValueD(d, index);
+                $('#ModalForm').modal('toggle');
+                if(m_field_id==17){
+                    loadQuestion($("#inp-"+opt.id), getQuestionList());
+                }
+                $("#questions").empty();
+
+                e.preventDefault();
+                return false;
+                //
+            });
+            $("#btn-cerrar").on('click', function(e){
+                $('#ModalForm').modal('toggle');
+                e.preventDefault();
+                return false;
+            });
+
+            $( document ).on( "click", "#btnAddField", function(event) {
+                var fopt = parseInt($fopt.val() || "0");
+                addField(fopt>0?1:0 ,{index:lastIndex()+1, value:"holaa"})
+            });
+            $( document ).on( "click", "#btnAddField2", function(event) {
+                addFieldv2({index:lastIndex()+1, value:""});
+                sortableManualList();
+            });
+            $( document ).on( "click", ".t-field button.btn-danger", function(event) {
+                var i = $(this).attr("tag");
+                $("#fv-"+i).remove();
+                //Actualizar lista
+                refreshManualList();
+            });
+            $( document ).on( "click", ".add-field", function(event) {
+                var $this = $(this);
+                var is_detail = $this.data("is-detail");
+                resetForm();
+                $("#is_detail").val(is_detail);
+                d=is_detail==1?ins:recs;
+                $("#fposition").val(getMaxPosition(d)+1);
+                //disabledFields(d,0);
+                //$(`#ffield option`).removeClass("d-none");
+                //$(`#ffield option[tag="${is_detail==0?1:0}"]`).addClass("d-none");
+                $("#findex").val("-1");
+                $("#fid").val("0");
+                $("#btnEliminar").css("display", "none");
+                fvSelect();
+                $("#fcolor").val("#000000");
+                $("#fsize").val("11");
+                $("#ffont").val("Arial");
+                generateSelect( $("#campos2"),d, -1, "name", "title");
+                generateSelect( $("#fcampos"),d, -1, "name", "title");
+            });
+
+            $( document ).on( "click", ".x-editar", function(event) {
+                $("#questions").empty();
+                iii = 0;
+                event.stopPropagation();
+                var $this = $(this);
+                var $parent1 = $this.parents(".f-input");
+                var $parent2 = $parent1.parent();
+                var xid = $parent2.attr("id");
+                var d = xid=="inputs2"?ins:recs;
+                $('.add-field').eq(xid=='inputs2'?1:0).trigger('click');
+                //console.log("#"+xid+">div");
+                var index = $("#"+xid+">div").index($parent1);
+
+                generateSelect( $("#campos2"),d, index, "name", "title");
+                generateSelect( $("#fcampos"),d, -1, "name", "title");
+
+                loadForm(index, d);
+                getVisibleValue(d[index].m_field_id);
+
+                var x_m_attr_id = d[index].m_attr_id || 0;
+
+                $("#btnEliminar").css("display", x_m_attr_id == 0 ? "": 'none');//ADDED
+                disabledFields(d,index);
+                setFValue(d[index].value);
+                console.log(d[index]);//ADDED
+
+            });
+            // $( document ).on( "dblclick", "#inputs>div,#inputs2>div", function(event) {
+            //     event.stopPropagation();
+            //     $this = $(this);
+            //     var $parent = $this.parent();
+            //     var xid = $parent.attr("id");
+            //     var d = xid=="inputs2"?ins:recs;
+            //     $('.add-field').eq(xid=='inputs2'?1:0).trigger('click');
+            //     var index = $("#"+xid+">div").index($this);
+            //     loadForm(index, d);
+            //     $("#btnEliminar").css("display", "");
+            //     disabledFields(d,index);
+            // });
+
+            $("#formModulos").on("submit", function(e){
+                e.preventDefault();
+                for(i in recs)
+                    recs[i]["tag"] = getTagIndex(recs, i);
+                for(i in ins)
+                    ins[i]["tag"] = getTagIndex(ins, i);
+                $("#datar").val(JSON.stringify(recs));
+                $("#datai").val(JSON.stringify(ins));
+                this.submit();
+                return false;
+            });
+
+            $btnChange.on("click", function(){
+                $flatRadios2.prop("checked", false);
+                $flatRadios1.prop("checked", true);
+                seleccionaRadio();
+                var fopt = $fopt.val();
+                $fopt.val(0);
+
+                //$flatRadios1.trigger("click");
+
+                var dx = getVArray(fopt, "pruebas.txt", o.v ||[]);
+                $cbfields.empty();
+                for(var i=0;i<dx.length;i++){
+                    var v = dx[i];
+                    var j = i+1;
+                    addFieldv2({index:j, value:""});
+                    $("#fvname-"+j).val(v.text);
+                    $("#fvvalue-"+j).val(v.key);
+                }
+                sortableManualList();
+            });
+
+            $btnRemoveField.on("click", function(){
+                $cbfields.empty();
+                $btnRemoveField.addClass("d-none");
+            });
+            //default
+            $.asColorPicker.setDefaults();
+            inicia();//{{ count($m_categories) == 0 || !$data["id"] ? 'false': '' }}
+            actualizarEditorSN('.editor-sn');
+
+            //FUNCIONES
+            function inicia(){
+                //if(noload=='undefined')noload = true;
+                recs = [];
+                ins = [];
+                $inputs.empty();
+                $inputs2.empty();
+                indexlel = 1;
+                inp_index = 0;
+                type_id_old = 0
+                oinputs = {};
+                oidputs = {};
+                var m_category_id = parseInt( {!!  count($m_categories)>0 && !$data["id"]? '$m_category_id': '$("#inpid")' !!}.val() );
+                //"{{route("modulos.inputs", $data["id"])}}"
+                var url_mii = "{{route("modulos.index")}}"+"/inputs/"
+                //if(noload)
+                url_mii += m_category_id;
+                $.getJSON(url_mii, function(d){
+                    recs = d.recs;
+                    ins = d.ins;
+                    doctypes = d.doctypes;
+                    groups = d.groups;
+                    countries = d.countries;
+                    emails = d.emails;
+                    domains = d.domains;
+                    departments = d.departments;
+                    refreshLista(recs, $inputs);
+                    refreshLista(ins, $inputs2);
+                    refreshFList(recs, $inputs);
+                    refreshFList(ins, $inputs2);
+                    regeneratePosition(recs);
+                    regeneratePosition(ins);
+                    selectAll();
+                    //REV//var ddd = getIndexTag("23");var data = ddd.data[ddd.index]
+                });
+            }
+            function regeneratePosition(data){
+                var n = data.length;
+                var is_repetead = false;
+                var v = -1, v0 = -1;
+                var v2 = -1;
+                for(var i=0; i<data.length;i++){
+                    v = data[i].position??0;
+                    if(v==v0&&!is_repetead){
+                        is_repetead = true;
+                        v2 = v0;
+                    }
+                    if(is_repetead)data[i].position = ++v2;
+                    v0 = v;
+                }
+            }
+
+            function generateInputHML(opt, index, tag){
+                var cls = opt.is_detail == 1? "p-0": "pb-2"
+                var xcolor = opt.m_attr_id ? '':'text-danger';
+                var $btnEditar = $('<div class="col-sm-12 text-right '+cls+'"><button type="button" class="border-0 x-editar '+xcolor+'" tag="'+index+'"><i class="mdi mdi-pencil"></i></button></div>');
+                //var $btnEditar = $('<button type="button" class="text-right right-icon-pos border-0 x-editar" tag="'+index+'"><i class="mdi mdi-pencil"></i></button>');
+                var h = getText(opt);
+                if(opt.visible == 0){
+                    h = `@include('modulos.inputs.hidden')`
+                }
+                var $o = $(h).prepend($btnEditar).addClass("e-relative").addClass("f-input");
+                var x = (tag == -1) ? indexlel: tag;
+                if(tag == -1)indexlel++;
+                $o.attr("tag", x).attr("id", "input--" + x);
+                $o.attr("data-attr-id", opt.m_attr_id);
+                return $o;
+            }
+
+            function refreshFList(data, $sel){
+                for(i in data){
+                    var v = data[i];
+                    var opt = v.opt ? JSON.parse(v.opt) : {};
+                    var flt = opt.flt||[];
+                    var xflt = flt.c||[];
+                    var xv2 = opt.v2||[];
+                    if(xflt.length>0 || xv2.length > 0){
+                        var xids = [];
+                        var xids2 = [];
+                        for(j in xflt) xids.push(oidputs["_"+xflt[j]]);
+                        for(j in xv2) xids2.push(oidputs["_"+xv2[j]]);
+                        if(xids.length>0)opt.flt.c = xids;
+                        if(xids2.length>0)opt.v2 = xids2;
+                        data[i].opt = JSON.stringify(opt);
+                    }
+                }
+            }
+
+            function refreshLista(data, $sel){
+                $.each(data, function(index, v){
+                    inp_index++;
+                    oinputs[index+"-"+v.is_detail] = inp_index;
+                    oidputs[ "_" + (v.id||0)] = inp_index;
+                    var opt = {
+                        "id": inp_index,//index,
+                        "name": v.name,
+                        "title": v.title,
+                        "subtitle": v.subtitle,
+                        "value": v.value,
+                        "note": v.note,
+                        "required": v.required,
+                        "visible": v.visible,
+                        "opt": v.opt,
+                        "m_field_id": v.m_field_id,
+                        "is_detail": v.is_detail,
+                        "m_attr_id": v.m_attr_id,
+                        "is_fullsize": v.is_fullsize,
+                        "is_title_hidden": v.is_title_hidden,
+                    }
+                    // $sel.append($(getText(opt)));
+                    $sel.append(generateInputHML(opt, inp_index, -1));
+                    loadCombo($("#inp-"+inp_index), opt);
+                    if(v.m_field_id==17){
+                        loadQuestion($("#inp-"+inp_index), v.value);
+                    }
+                })
+                setPickers()
+                var xswap = false;
+                var opts ={ animation: 150,ghostClass: 'ghostClass', swap: xswap, onEnd: function(e){
+                        var oldIndex = e.oldIndex;
+                        var newIndex = e.newIndex;
+                        var id = e.to.id;
+                        // if (oldIndex != newIndex){
+                        //     var o1 = data[oldIndex];
+                        //     var o2 = data[newIndex];
+                        //     var p1 = o1.position;
+                        //     var p2 = o2.position;
+                        //     o1.position = p2;
+                        //     o2.position = p1;
+                        //     data[oldIndex] = o2;
+                        //     data[newIndex] = o1;
+                        // }
+                        //sort1(data, oldIndex, newIndex);
+                        sort2(data, oldIndex, newIndex);
+                        //console.log(data);
+                    }
+                }
+                $sel.sortable(opts);
+            }
+
+            function sort1(data, oldIndex, newIndex){
+                if (oldIndex != newIndex){
+                    var o1 = data[oldIndex];
+                    var o2 = data[newIndex];
+                    var p1 = o1.position;
+                    var p2 = o2.position;
+                    o1.position = p2;
+                    o2.position = p1;
+                    data[oldIndex] = o2;
+                    data[newIndex] = o1;
+                }
+            }
+            function sort2(data, oldIndex, newIndex){
+                if (oldIndex != newIndex){
+                    if(newIndex < oldIndex){
+                        for(var i = oldIndex; i>newIndex;i--){
+                            console.log(i);
+                            sort0(data, i, i-1);
+                        }
+                    }
+                    else{
+                        for(var i = oldIndex; i<newIndex;i++){
+                            console.log(i);
+                            sort0(data, i, i+1);
+                        }
+                    }
+                }
+            }
+            function sort0(data, oldIndex, newIndex){
+                if (oldIndex != newIndex){
+                    var o1 = data[oldIndex];
+                    var o2 = data[newIndex];
+                    var p1 = o1.position;
+                    var p2 = o2.position;
+                    o1.position = p2;
+                    o2.position = p1;
+                    data[oldIndex] = o2;
+                    data[newIndex] = o1;
+                }
+            }
+
+            function setValueD(d, index){
+                if(typeof d[index] === 'undefined')d[index]={};
+                //d[index].m_attr_id = parseInt($("#ffield option:selected").attr("value") ||0);
+                d[index].m_attr_id = parseInt($("#ffield").val() ||0);
+                d[index].id = parseInt($("#fid").val());
+                d[index].m_field_id = parseInt($("#ftype").val());
+                d[index].name = $("#fname").val();
+                d[index].title = $("#ftitle").val();
+                d[index].subtitle = $('#fsubtitle').summernote('code');//$("#fsubtitle").val();
+                d[index].note = $('#fnote').summernote('code');//$("#fnote").val();
+                d[index].position = parseInt($("#fposition").val());
+                d[index].is_detail = $("#is_detail").val()!=1?0:1;
+                d[index].required = $("#frequired").prop("checked")?1:0;
+                d[index].visible = $("#fvisible").prop("checked")?1:0;
+                d[index].value = getFValue();
+                d[index].opt = JSON.stringify(generateOpt());
+                d[index].style = JSON.stringify({"c": $("#fcolor").val(), "s":$("#fsize").val(), "f":$("#ffont").val()});
+                d[index].is_title_hidden = $("#f_is_title_hidden").prop("checked")?1:0;
+                d[index].is_fullsize = $("#f_is_fullsize").prop("checked")?1:0;
+            }
+
+            function getOpt(){
+                if($flatRadios1.prop("checked"))return 1;
+                if($flatRadios2.prop("checked"))return 2;
+                return 0;
+            }
+
+            function generateOpt(){
+                var xopts = {
+                }
+                // var fop = parseInt($fopt.val() || "0");
+                var type_id = parseInt($("#ftype").val() || "0");
+                var fop = verifyElements(type_id) ? getOpt(): 0;
+                var tfields = $(".t-field");
+                if([1, 2, 3, 4].includes(type_id))xopts["ml"] = $fMaxlength.val();
+                if([1, 2, 3, 4, 7, 8, 9, 11].includes(type_id))xopts["ph"] = $fPlaceholder.val();
+                if([7, 8, 9].includes(type_id))xopts["f"] = $fFormato.val();
+                if(type_id==2)xopts["ed"] = $fEditor.val();
+                if(type_id==4)xopts["dm"] = $fDominio.prop("checked")?1:0;
+                if(type_id==5)xopts["gr"] = $fGrupo.val();
+                if(type_id==3) {
+                    xopts["max"] = $fMax.val();
+                    xopts["min"] = $fMin.val();
+                    xopts["st"] = $fStep.val();
+                }
+                if(type_id==15) {
+                    //xopts["acc"] = $fAccept.val();
+                    xopts["acc"] = getCheckFts();
+                    xopts["sz"] = $fSize.val();
+                }
+                if(type_id==18) {
+                    xopts["max"] = $fMaxE.val();
+                    xopts["min"] = $fMinE.val();
+                    xopts["count"] = $fCountE.val();
+                }
+                if(fop > 0){
+                    if(verifyElements(type_id) && fop==1){
+                        var xvals = []
+                        $.each(tfields, function(v, k){
+                            var ii = parseInt(this.id.substring(3))
+                            var c = "", d = "";
+                            var a = $("#fvname-"+ii).val();
+                            var b = $("#fvvalue-"+ii).val();
+                            xvals.push([a,b,c,d]);
+                        });
+                        xopts["v"] = xvals;
+                    }
+                    xopts["t"] = $("#fopt").val();
+                    if(fop==2){
+                        xopts["v2"] = $fcampos.val() || [];
+                    }
+                }
+                xopts["flt"] = {
+                    "f": $fCond.val(),
+                    "e": $fEfecto.val(),
+                    "c": $campos2.val(),
+                }
+                return xopts;
+            }
+
+            function getTagIndex(d, i){
+                var $inp = d[i].is_detail?$inputs2:$inputs;
+                return parseInt($($inp.children()[i]).attr("tag"));
+            }
+
+            function getIndexTag(tag){
+                var $inp = $("#input--"+tag);
+                var $parent = $inp.parent();
+                var xid = $parent.attr("id");
+                var d = xid=="inputs2"?ins:recs;
+                var index = $("#"+xid+">div").index($inp);
+                return {index, data: d};
+            }
+
+            function loadFilter($input, v){
+                var vv = [];
+                for(i in v) {
+                    var $ob = $input.find('option[value="'+v[i]+'"]');
+                    if($ob.length){
+                        //$ob.prop("selected", "selected");
+                        vv.push(v[i]);
+                    }
+                }
+                $input.val(vv).trigger("change");
+                $input.select2();
+            }
+
+            function generateSelect($select, d, ignoreIndex, k, v){
+                $select.empty();
+                for(i in d) {
+                    if (i != ignoreIndex){
+                        var xtg = getTagIndex(d, i);
+                        $("<option></option>").attr("value", xtg).text(d[i][v]).appendTo($select);//d[i][k]
+                    }
+                }
+                $select.select2();
+            }
+
+            function verifyCValue(d, idx, p, v){
+                for(i in d){
+                    if(i != idx )
+                        if(d[i][p] == v)
+                            return true;
+                }
+                return false;
+            }
+
+            function seleccionaRadio(){
+                $(".f-select-1, .f-select-2").css("display", "none");
+                if($flatRadios1.prop("checked"))$(".f-select-1").css("display", "");
+                if($flatRadios2.prop("checked"))$(".f-select-2").css("display", "");
+            }
+            $flatRadios1.on("click", function(){
+                $fopt.val(0);
+                $fopt.trigger("change");
+                seleccionaRadio();
+            });
+            $flatRadios2.on("click", seleccionaRadio);
+
+            function verifyElements(type_id){
+                return [11, 12, 13, 14].includes(type_id);
+            }
+
+            function fvSelect(){
+                var type_id = parseInt($("#ftype").val() || "0");
+                if(type_id!=type_id_old && type_id_old==17)setFValue("");
+                //$fvselect.addClass("d-none");
+                // var e1 = verifyElements(type_id);
+                // var e2 = verifyElements(type_id_old);
+
+                // if(!e1 || !e2)$cbfields.empty();
+                // if (e1){
+                //     //$fvselect.removeClass("d-none");
+                //     if(!e2)$fopt.val("0");
+                //     $fopt.trigger("change");
+                // }
+                type_id_old = type_id;
+
+                $ftexts.css("display", "none");
+                $(".f-"+type_id).css("display","");
+                $fselect.css("display", type_id>10 && type_id < 15 ? "": "none");
+
+                $flatRadios1.prop("checked", true);
+
+                $(".f-select-1, .f-select-2").css("display", "none");
+                seleccionaRadio();
+                getVisibleValue(type_id);
+            }
+            $("#ftype").on("change", fvSelect);
+            // $fopt.on("change", function(){
+            //     $sel = $(".t-field");
+            //     if($sel.length==0) {
+            //         addField(this.selectedIndex, {index: lastIndex()+1, value: "holaa"})
+            //     }
+            // });
+
+            function addField(i, opt){
+                var h = '';
+                if(i==0)
+                    h = `@include("modulos.modal.manual")`;
+                else
+                    h = `@include("modulos.modal.combo")`;
+                $cbfields.append($(h));
+                // $fopt.prop("disabled", true);
+            }
+            function addFieldv2(opt){
+                var h = `@include("modulos.modal.inputs2")`;
+                $cbfields.append($(h));
+                $btnRemoveField.removeClass("d-none");
+            }
+
+            function getText(opt){
+                opt.req = opt.required == 1?"*":"";
+                opt.cls = opt.is_fullsize != 1?"col-sm-12 col-md-4":"clearfix col-sm-12";
+                opt.clsh = opt.is_title_hidden == 1?"d-none":"";
+
+                //console.log(opt.is_detail);
+                @foreach($fields as $f)
+                    @if( View::exists('modulos.inputs.'.$f->id ))
+                if( opt.m_field_id == {{$f->id}} ) return opt.is_detail != 1 ? `@include('modulos.inputs.js.'.$f->id, ["form"=>1])`: `@include('modulos.inputs.js.'.$f->id)`;
+                @endif
+                @endforeach
+                    return opt.is_detail != 1 ? `@include("modulos.inputs.js.1", ["form"=>1])` : `@include('modulos.inputs.js.1')`;
+            }
+
+            function resetForm(){
+                loadField(emptyField());
+            }
+
+            function sortPosition(d){
+                return d.sort(function(a, b) {
+                    var keyA = a.position,
+                        keyB = b.position;
+                    if (keyA < keyB) return -1;
+                    if (keyA > keyB) return 1;
+                    return 0;
+                });
+            }
+
+            function getMaxPosition(data){
+                var m = 0;
+                for (let [k, v] of Object.entries(data))
+                    if (v.position > m) m = v.position;
+                return m;
+            }
+            function getExistsPosition(data, pos){
+                for (let [k, v] of Object.entries(data))
+                    if (v.position == pos) return true;
+                return false;
+            }
+            function disabledFields(data, exclude=0){
+                $(`#ffield option`).attr("disabled", false);
+                for (let [k, v] of Object.entries(data))
+                    if(v.m_attr_id!=exclude)$(`#ffield option[value="${v.m_attr_id}"]`).attr("disabled", true);
+                return false;
+                //d[index]. = $("#ffield").val();
+            }
+
+            function emptyField(){
+                return {
+                    "id": 0,
+                    "m_attr_id": 0,
+                    "m_field_id": 0,
+                    "name": "",
+                    "title": "",
+                    "subtitle": "",
+                    "note": "",
+                    "position": 1,
+                    "is_detail": 0,
+                    "required": 0,
+                    "visible": 1,
+                    "index": 0,
+                    "style": JSON.stringify({"c":"", "s":"", "f":""}),
+                    "value":"",
+                    "opt": "{}",
+                    "is_title_hidden": 0,
+                    "is_fullsize": 0,
+                }
+            }
+
+            function loadField(v){
+                var fid = v.id || 0;
+                $("#fid").val(fid);
+                $("#ffield").val(v.m_attr_id);
+                $("#ftype").val(v.m_field_id);
+                $("#fname").val(v.name);
+                $("#ftitle").val(v.title);
+                //$("#fsubtitle").val(v.subtitle);
+                $('#fsubtitle').summernote('code', v.subtitle);
+                //$("#fnote").val(v.note);
+                $('#fnote').summernote('code', v.note);
+                $("#fposition").val(v.position);
+                $("#is_detail").val(v.is_detail);
+                $("#frequired").prop("checked",v.required);
+                $("#fvisible").prop("checked",v.visible);
+                $("#findex").val(v.index);
+
+
+                if(v.m_field_id==17) {
+                    iii = 0;
+                    var vval = v.value || []; //isJson(v.value)  ? JSON.parse(v.value) : (Array.isArray(v.value)? v.value: []);
+                    for(i in vval) {
+                        iii++;
+                        var v2 = vval[i];
+                        v2.index = iii;
+                        addFielQ(v2);
+                        $("#fqname-"+v2.index).summernote("code", v2.text);
+                        $("#fqreq-"+v2.index).prop("checked", v2.required == 1);
+                    }
+                    refreshQuestionList();
+                }
+
+                $("#fvalue").val(v.value);
+                var st = v.style ? JSON.parse(v.style) : {};
+                $("#fsize").val(st.s || "");
+                $("#fcolor").val(st.c || "");
+                $("#ffont").val(st.f || "");
+                $("#f_is_title_hidden").prop("checked",v.is_title_hidden);
+                $("#f_is_fullsize").prop("checked",v.is_fullsize);
+                var sopt = v.opt ? JSON.parse(v.opt) : {};
+                $("#ftype").trigger('change');
+
+                if(verifyElements(v.m_field_id)){
+                    //$("#ftype").trigger('change');
+                    $fopt.val(sopt.t);
+                    //$fopt.trigger('change');
+                    $flatRadios1.prop("checked", sopt.t == 0);
+                    $flatRadios2.prop("checked", sopt.t > 0);
+                    seleccionaRadio();
+                    var vv = sopt.v || [];
+                    $cbfields.empty();
+                    for(var i=0;i<vv.length;i++){
+                        var tt = sopt.t;
+                        var j = i+1;
+                        addFieldv2({index:j, value:""});
+                        var a = vv[i][0];
+                        var b = vv[i][1];
+                        var c= vv[i][2];
+                        var d = vv[i][3];
+                        if(tt==0){
+                            $("#fvname-"+j).val(a);
+                            $("#fvvalue-"+j).val(b);
+                        }else{
+                            $("#fvfield-"+j).val(c);
+                        }
+                        $("#fvcheck-"+j).prop("checked", d == 1);
+                    }
+                    sortableManualList();
+                }
+                var flt = sopt.flt || {};//f d c
+                var flt_f = flt.f || "";
+                var flt_e = flt.e || "";
+                var flt_c = flt.c || [];
+                var flt_v2 = sopt.v2 || [];
+                loadFilter($campos2, flt_c);
+                loadFilter($fcampos, flt_v2);
+                $fCond.val(flt_f);
+                $fEfecto.val(flt_e);
+                //cargar otros datos
+                if([1, 2, 3, 4].includes(v.m_field_id))$fMaxlength.val(sopt["ml"]||"");
+                if([1, 2, 3, 4, 7, 8, 9, 11].includes(v.m_field_id))$fPlaceholder.val(sopt["ph"] || "");
+                if([7, 8, 9].includes(v.m_field_id))$fFormato.val(sopt["f"] || "");
+                if(v.m_field_id==2)$fEditor.val(sopt["ed"] || 0);
+                if(v.m_field_id==4)$fDominio.prop("checked", sopt["dm"] && sopt["dm"] == 1);
+                if(v.m_field_id==5)$fGrupo.val(sopt["gr"] || "");
+                if(v.m_field_id==3) {
+                    $fMax.val(sopt["max"] || "");
+                    $fMin.val(sopt["min"] || "");
+                    $fStep.val(sopt["st"] || "");
+                }
+                if(v.m_field_id==15) {
+                    //$fAccept.val(sopt["acc"] || "");
+                    setCheckFts(sopt["acc"])
+                    $fSize.val(sopt["sz"] || "");
+                }
+                if(v.m_field_id==18) {
+                    $fMaxE.val(sopt["max"] || "");
+                    $fMinE.val(sopt["min"] || "");
+                    $fCountE.val(sopt["count"] || "");
+                }
+            }
+
+            function loadForm(index, data){
+                resetForm();
+                var v = data[index];
+                v.index = index;
+                setCheckFts("");
+                $chkPermite.prop('checked', false);
+                $('.chk-ft :checkbox').prop('checked', false);
+                loadField(v);
+            }
+
+            function lastIndex(){
+                var $tfields = $(".t-field");
+                var  nn = $tfields.length
+                var ii = nn > 0 ? parseInt($tfields[nn-1].id.substring(3)) : 0;
+                return ii;
+            }
+
+            function refreshManualList(){
+                var dx = getManualList();
+                $cbfields.empty();
+                for(var i=0;i<dx.length;i++){
+                    var v = dx[i];
+                    var j = i+1;
+                    addFieldv2({index:j, value:""});
+                    $("#fvname-"+j).val(v[0]);
+                    $("#fvvalue-"+j).val(v[1]);
+                }
+                sortableManualList();
+
+                if(dx.length==0)$btnRemoveField.addClass("d-none");
+            }
+
+            function sortableManualList(){
+                var opts ={ animation: 150,ghostClass: 'ghostClass', swap: false, onEnd: function(e){
+                        refreshManualList();
+                    }
+                }
+                $("#cbfields").sortable(opts);
+                $fopt.trigger("change");//ADDED
+                $("#cbfields input:text").on("keyup",function(){$fopt.trigger("change");});
+            }
+
+
+            function loadCombo($select, v){
+                var m_field_id = v.m_field_id;
+                if($select.is("select")||verifyElements(m_field_id)){
+                    $select.empty();
+                    if (m_field_id == 11)$select.append('<option value="" disabled selected></option>');
+                    if(verifyElements(m_field_id)){
+                        o = JSON.parse(v.opt)
+                        t = o.t || 0;
+                        d = [];
+                        var dx = getVArray(t, v.id, o.v ||[]);
+                        for(i in dx) {
+                            var v = dx[i];
+                            if ([11, 12,].includes(m_field_id))$("<option></option>").attr("value", v.key).text(v.text).appendTo($select);
+                            if (m_field_id == 13)createLRadio($select, v.id, v.index, v.key, v.text);
+                            if (m_field_id == 14)createLCheck($select, v.id, v.index, v.key, v.text);
+                        }
+                    }
+                }
+            }
+
+            function createLRadio($selector, id, index, key, value){
+                $(`<div class="form-check">
+                                    <input type="radio" id="inp-${id}-o-${index}" name="inputs[${id}]" class="form-check-input check_click" value="${key}">
+                                        <label class="form-check-label" for="inp-${id}-o-${index}">${value} <i class="input-helper"></i></label>
+                                </div>`).appendTo($selector)
+            }
+            function createLCheck($selector, id, index, key, value){
+                $(`<div class="form-check">
+                                    <input type="checkbox" id="inp-${id}-o-${index}" name="inputs[${id}]" class="form-check-input check_click" value="${key}">
+                                        <label class="form-check-label" for="inp-${id}-o-${index}">${value} <i class="input-helper"></i></label>
+                                </div>`).appendTo($selector)
+            }
+            function getVArray(t, id, vv){
+                var arr = [];
+                if(t==0){
+                    var dd = vv || [];
+                    $.each(dd,function(index,v){arr.push({id, index, key: v[1], text: v[0]});});
+                }
+                if (t == 1 || t == 2) {
+                    var dd = t == 1 ? doctypes : groups;
+                    $.each(dd,function(index,v){arr.push({id, index, key: v.id, text: v.name});});
+                }
+                if(t==3)$.each(countries,function(index,v){arr.push({id, index, key: v.name, text: v.name});});
+                if(t==4)$.each(departments,function(index,v){arr.push({id, index, key: v.nombre, text: v.nombre});});
+                if(t==7)$.each(domains,function(index,v){arr.push({id, index, key: v.id, text: v.domain});});
+                if(t==6)$.each(emails,function(index,v){arr.push({id, index, key: v.id, text: v.name + " - " + v.email});});
+                return arr;
+            }
+
+            function getManualList(){
+                var tfields = $(".t-field");
+                var xvals = []
+                $.each(tfields, function(v, k){
+                    var ii = parseInt(this.id.substring(3))
+                    var c = "", d = "";
+                    var a = $("#fvname-"+ii).val();
+                    var b = $("#fvvalue-"+ii).val();
+                    xvals.push([a,b]);
+                });
+                return xvals;
+            }
+
+            //inputs
+            function setPickers(){
+                $sel = $('.datepicker-input');
+                if ($sel.length)
+                    $sel.datepicker({
+                        enableOnReadonly: true,
+                        todayHighlight: true,
+                        format: 'dd/mm/yyyy'
+                    });
+                $sel = $('.timepicker-input');
+                if ($sel.length)
+                    $sel.timepicker();
+            }
+            function actualizarEditorSN(s){
+                $(s).summernote({
+                    placeholder: 'Texto...',
+                    tabsize: 2,
+                    toolbar: [
+                        ['fontname', ['fontname']],
+                        ['fontsize', ['fontsize']],
+                        ['font', ['bold', 'underline', 'clear']],
+                        ['forecolor', ['forecolor']],
+                        ['view', ['fullscreen', 'codeview']]//, 'help'
+                    ],
+                    lang: 'es-ES' // default: 'en-US'
+                });
+            }
+
+            //<>
+            function selectAll(){
+                var chk = $chkAll.prop("checked") ? 1: 0;
+                var $inps = $("#inputs > div");
+                $inps.removeClass("d-none");
+                if(chk==0 && $inps.length){
+                    $inps.each(function(i, v){
+                        var x = parseInt($(this).data("attr-id"));
+                        if(chkAllIds.indexOf(x) == -1){
+                            $(this).addClass("d-none");
+                        }
+                    });
+                }
+            }
+            function isJson(str) {
+                try {
+                    JSON.parse(str);
+                } catch (e) {
+                    return false;
+                }
+                return true;
+            }
+            //Valores predterminados
+            function getFValue(){
+                var t = parseInt($("#ftype").val());
+                if(t==11||t==13) return $fvalue2.val();
+                if(t==12||t==14) return $fvalue3.val();
+                if(t==17)return getQuestionList();
+                return $fvalue.val();
+            }
+            function setFValue(v){
+                var t = parseInt($("#ftype").val());
+                if(t==11||t==13) return $fvalue2.val(v||"");
+                if(t==12||t==14){
+                    $fvalue3.val(v||[]);
+                    $fvalue3.select2(select2_opts);
+                    return;
+                }
+                return $fvalue.val(v||"");
+            }
+            function getVisibleValue(t){
+                $fvalue.parent().addClass("d-none");
+                $fvalue2.parent().addClass("d-none");
+                $fvalue3.parent().addClass("d-none");
+
+                $("#fDefault").removeClass("d-none");
+                $('.f-questions').addClass("d-none");
+                $fExp.addClass("d-none");
+                if(t==17){
+                    $("#fDefault").addClass("d-none");
+                    $('.f-questions').removeClass("d-none");
+                    return;
+                }
+                if(t==18){
+                    $fExp.removeClass("d-none");
+                    return;
+                }
+
+                if(t==11||t==13){
+                    $fvalue2.parent().removeClass("d-none");
+                    loadValues($fvalue2, t, "");
+                    return $fvalue2;
+                }
+                if(t==12||t==14){
+                    $fvalue3.parent().removeClass("d-none");
+                    loadValues($fvalue3, t, "");
+                    $fvalue3.select2(select2_opts);
+                    return $fvalue3;
+                }
+                $fvalue.parent().removeClass("d-none");
+                return $fvalue;
+            }
+            function loadValues($select, t,p){
+                var pl = p || "";
+                $select.empty();
+                var fopt = parseInt($fopt.val() || "0");
+                var dx = getVArray(fopt, "campo-value", getManualList());
+                $("<option></option>").attr("value", "").text(pl).appendTo($select);
+                for(i in dx) {
+                    var v = dx[i];
+                    $("<option></option>").attr("value", v.key).text(v.text).appendTo($select);
+                }
+            }
+
+            //
+            function addFielQ(opt){
+                var h = `@include("modulos.modal.inputs-q")`;
+                $("#questions").append($(h));
+                var s = `#fqname-${opt.index}`;
+                actualizarEditorSN(s);
+                $(s).summernote('code', opt.text);
+                $(`#fqreq-${opt.index}`).prop("checked", opt.req==1);
+            }
+
+            function loadQuestion($select, v){
+                var values = isJson(v)  ? JSON.parse(v) : (Array.isArray(v)? v: []);
+                $select.empty();
+                for(i in values) {
+                    var opt = values[i];
+                    opt.rq = opt.required ==1 ? '*': '';
+                    createLQuestion($select, opt)
+                }
+            }
+
+            function createLQuestion($selector, opt){
+                $(`@include("modulos.modal.inputs-q", ["js_form"=>1])`).appendTo($selector)
+            }
+
+            $("#add_question").on("click", function(e){
+                iii++;
+                e.preventDefault();
+                addFielQ({
+                    index: iii,
+                    text: "",
+                    req: 0
+                });
+                return false;
+            });
+            $( document ).on( "click", ".t-question button.btn-danger", function(event) {
+                var i = $(this).attr("tag");
+                $("#fq-"+i).remove();
+                //Actualizar lista
+                iii --;
+                refreshQuestionList();
+            });
+
+            function getQuestionList(){
+                var tfields = $(".t-question");
+                var xvals = []
+                $.each(tfields, function(v, k){
+                    var index = parseInt(this.id.substring(3))
+                    var text = $("#fqname-"+index).summernote('code');
+                    var required = $("#fqreq-"+index).prop('checked') ==1 ? 1: 0;
+                    xvals.push({index, text, required});
+                });
+                return xvals;
+            }
+            function refreshQuestionList(){
+                iii = 0;
+                var dx = getQuestionList();
+                $("#questions").empty();
+                for(var i=0;i<dx.length;i++){
+                    iii++;
+                    var v = dx[i];
+                    v.index = iii;
+                    addFielQ(v);
+                    $("#fqname-"+v.index).summernote("code", v.text);
+                    $("#fqreq-"+v.index).prop("checked", v.required == 1);
+                }
+                sortableQuestionList();
+            }
+            function sortableQuestionList(){
+                var opts ={ animation: 150,ghostClass: 'ghostClass', swap: false, onEnd: function(e){
+                        refreshQuestionList();
+                    }
+                }
+                $("#questions").sortable(opts);
+            }
+            function getCheckFts(){
+                var val = [];
+                if($chkPermite.prop("checked")){
+                    $('.chk-ft :checkbox:checked').each(function(i){
+                        val[i] = $(this).val();
+                    });
+                }
+                return val.join(",");
+            }
+            function setCheckFts(s){
+                s=s+""
+                var ftp = s.split(",")||[];
+                var n = ftp.length;
+
+                for(var i=0;i<n;i++){
+                    var $ob = $('.chk-ft :checkbox[value="'+ftp[i]+'"]');
+                    if($ob.length)$ob.prop('checked', true);
+                }
+                $chkPermite.prop("checked", n>0);
+                $('.chk-ft :checkbox').prop('disabled', !$chkPermite.prop("checked"));
+            }
+        });
+    </script>
+@endsection

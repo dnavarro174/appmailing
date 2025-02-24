@@ -1,0 +1,14 @@
+            function getText(opt){
+                opt.req = opt.required == 1?"*":"";
+                if(opt.m_field_id == 2) return `@include("modulos.inputs.textarea")`;
+                if(opt.m_field_id == 3) return `@include("modulos.inputs.number")`;
+                if(opt.m_field_id == 5) return `@include("modulos.inputs.checkbox")`;
+                if(opt.m_field_id == 6) return `@include("modulos.inputs.radio")`;
+                if(opt.m_field_id == 7) return `@include("modulos.inputs.date")`;
+                if(opt.m_field_id == 8) return `@include("modulos.inputs.time")`;
+                if(opt.m_field_id == 9) return `@include("modulos.inputs.datetime")`;
+                if(opt.m_field_id == 11) return `@include("modulos.inputs.combo")`;
+                if(opt.m_field_id == 13) return `@include("modulos.inputs.list")`;
+                if(opt.m_field_id == 15) return `@include("modulos.inputs.file")`;
+                return `@include("modulos.inputs.text")`;
+            }

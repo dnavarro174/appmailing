@@ -1,0 +1,132 @@
+<html lang="en"><head>
+<meta charset="utf-8">
+</head>
+<body>
+<table width="650" border="0" cellspacing="0" cellpadding="0" align="center">
+  <tbody>
+    <tr>
+
+         <td><table width="650" border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+          <tr>
+            <td width="110" height="75"><a href="https://www.enc.edu.pe/" target="_blank"><img src="https://enc-ticketing.org/comunicaciones/encomunicacion/EVENTOS_2022/12.diciembre/observatorio/logos/logo_enc.jpeg" width="130" height="auto" alt=""/></a></td>
+            <td width="233" height="65">&nbsp;</td>
+            <td width="297" height="75"><a href="https://www.contraloria.gob.pe/wps/wcm/connect/cgrnew/as_contraloria/as_portal" target="_blank"><img src="https://enc-ticketing.org/comunicaciones/encomunicacion/EVENTOS_2022/12.diciembre/observatorio/logos/Logo_OBANT.jpeg" width="297" height="auto" alt=""/></a></td>
+          </tr>
+        </tbody>
+      </table></td>
+
+        </tr>
+  </tbody>
+</table>
+<table align="center" width="650" cellspacing="0">
+  <tbody><tr>
+    <td align="center"><img src="https://enc-ticketing.org/comunicaciones/encomunicacion/EVENTOS_2022/12.diciembre/observatorio/logos/banner_usuario.png" alt="" width="650" height="353" align="right"></td>
+  </tr>
+  <tr>
+    <td height="20px"></td>
+  </tr>
+  <tr>
+    <td height="20px" align="center"><p><font style="font-size: 21px; font-family: arial"><font size="5" color="#000" face="arial">      
+      {{ $nombres }}
+      </font><br>
+      <br>
+      Usted ha sido aceptado en el siguiente evento:<br>
+       
+		<br> <strong>Lanzamiento del Observatorio Anticorrupción de la CGR Perú Foro: “La corrupción bajo la lupa”</strong></font></font></p></td>
+  </tr>
+  <tr>
+    <td height="20px"></td>
+  </tr>
+  <tr>
+    <td height="20px" align="center"><table width="600" height="210" border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+          <tr>
+            <td align="center" valign="middle" bgcolor="#FDF5F5"><table width="450" border="0" cellspacing="0" cellpadding="0">
+                <tbody>
+                  <tr>
+                    <td height="40px" align="center" valign="bottom"><table width="364" border="0" cellspacing="0" cellpadding="0">
+                        <tbody>
+                          <tr>
+                            <td width="89" valign="bottom" height="84"><img src="https://enc-ticketing.org/comunicaciones/encomunicacion/EVENTOS_2022/12.diciembre/observatorio/logos/persona.png" alt="" width="80" height="78"></td>
+                            <td width="112" valign="middle"><font color="#CC0003" style="font-size: 16px; font-family: arial">Usuario / User<strong><br>
+                              {{ $usuario }}</strong></font></td>
+                            <td width="71"><img src="https://enc-ticketing.org/comunicaciones/encomunicacion/EVENTOS_2022/12.diciembre/observatorio/logos/candado.png" alt=""></td>
+                            <td width="92" valign="middle"><font color="#CC0003" style="font-size: 16px; font-family: arial">Contraseña / Password<strong><br>
+                              {{ $pass }}</strong></font></td>
+                          </tr>
+                          <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                          </tr>
+                        </tbody>
+                      </table></td>
+                  </tr>
+
+                  <tr>
+                    <td style="text-align: center"><font style="font-size: 16px; font-family: arial; text-align: center">Para confirmar su participación es necesario validar sus datos y elegir la actividad <strong>Lanzamiento del Observatorio Anticorrupción de la CGR Perú Foro:<br> “La corrupción bajo la lupa”</strong>
+</font></td>
+                  </tr>
+                  <tr>
+                    <td height="40px" align="center" valign="bottom"><a href="https://enc-ticketing.org/evento" target="_blank"><img src="https://enc-ticketing.org/comunicaciones/encomunicacion/EVENTOS_2022/12.diciembre/observatorio/logos/validar.png" alt="" width="162" height="33"></a></td>
+                  </tr>
+                </tbody>
+              </table></td>
+          </tr>
+        </tbody>
+      </table></td>
+  </tr>
+  <tr>
+    <td height="20px"></td>
+  </tr>
+</tbody></table>
+<table align="center" width="650  " bgcolor="white" cellspacing="0">
+  <tbody><tr>
+    <td><table width="650" border="0" cellspacing="0">
+        <tbody>
+          <tr>
+            <td><br></td>
+          </tr>
+          <tr>
+            <td><img src="https://enc-ticketing.org/comunicaciones/encomunicacion/EVENTOS_2022/12.diciembre/observatorio/logos/linea.jpg" alt="line" width="278" height="32"></td>
+          </tr>
+          <tr>
+            <td><br></td>
+          </tr>
+          <tr>
+            <td><table width="650" border="0" cellspacing="0" cellpadding="0">
+                <tbody>
+                  <tr>
+                    <td width="34">&nbsp;</td>
+                    <td width="582">
+                      <p style="font-size: 14px; font-family: arial;text-align: justify;">En este evento se presentará el Observatorio Anticorrupción de la Contraloría General de la República, y centro de investigación de la Contraloría General de la República, que tiene como objetivo aportar, desde el campo de la investigación científica, comprender el fenómeno de la corrupción y la inconducta funcional en el sector público, así a mejorar e innovar los procesos de control gubernamental, y contribuir a favorecer la mejora de la toma de decisiones en pro de fortalecer la prevención y combate de la corrupción en el país. Para ello, se lanzará la plataforma web desde donde se mostrarán sus principales productos, siendo el producto de estreno los resultados del Índice de Corrupción e Inconducta Funcional de la Contraloría General para el periodo 2021.</p>
+                      <p style="font-family: Arial;font-weight: bold;">
+                      <a href="https://enc-ticketing.org/comunicaciones/encomunicacion/EVENTOS_2022/12.diciembre/observatorio/programa/Programa_Lanzamiento_del_OBANT_ESP.pdf" target="_blank" style="text-decoration: none;">Ver programa - ESP</a></p>
+                      
+                      
+                    </td>
+                    <td width="34">&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td><br></td>
+                    <td>
+					  
+					  
+						
+					  </td>
+                    <td><br></td>
+                  </tr>
+                </tbody>
+              </table>
+              
+			  
+			  </td>
+          </tr>
+        </tbody>
+      </table></td>
+  </tr>
+</tbody></table>
+
+</body></html>

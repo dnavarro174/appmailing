@@ -1,0 +1,1 @@
+Se registro al evento

@@ -1,0 +1,149 @@
+@extends('layout.home')
+
+@section('content')
+
+    <div class="container-scroller">
+        <!-- partial:partials/_navbar.html -->
+
+        @include('layout.nav_superior')
+        <!-- end encabezado -->
+        <!-- partial -->
+        <div class="container-fluid page-body-wrapper">
+
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    <div class="row justify-content-center">
+                        <div class="col-md-9 grid-margin stretch-card">
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <h4 class="card-title text-transform-none">Creación de {{ $modulo->name }}</h4>
+
+                                    @if (session('alert'))
+                                        <div class="alert alert-success">
+                                            {{ session('alert') }}
+                                        </div>
+                                    @endif
+
+
+                                    <form class="forms-sample pr-4 pl-4" id="caiieventosForm" action="{{ route('mcat.store', [$modulo->id]) }}" method="post" enctype="multipart/form-data">
+                                        {!! csrf_field() !!}
+                                        <input type="hidden" name="id" value="{{$m_product_id}}">
+
+                                        @foreach($recs as $v)
+                                            @php($v->value = array_key_exists($v->field, $product_data) ? $product_data[$v->field] : "")
+                                            <div class="form-group row" id="content-{{$v->id}}">
+                                                <label for="inp-{{$v->id}}" class="col-sm-2 col-form-label d-block">{{$v->title}} <span class="text-danger">{{$v->required?'*':''}}</span></label>
+                                                <div class="col-sm-10">
+
+                                                    @if( View::exists('modulos.inputs.'.$v->m_field_id ))
+                                                        @include('modulos.inputs.'.$v->m_field_id, ["input"=>$v])
+                                                    @else
+                                                        @include('modulos.inputs.1', ["input"=>$v])
+                                                    @endif
+                                                        <input type="hidden" name="f[{{$v->id}}]" value="{{$v->field}}">
+                                                </div>
+                                            </div>
+                                        @endforeach
+
+                                        <div class="form-group row">
+                                            <label for="auto_conf" class="col-sm-2 col-form-label">Campos</label>
+                                            <div class="col-sm-10">
+                                                @foreach($ins_chunk as $ins)
+                                                    <div class="form-group row">
+                                                        @foreach($ins as $v)
+                                                        <div class="col-sm-4">
+                                                            <div class="form-check">
+                                                                <div class="col-sm-10 form-check form-check-flat">
+                                                                    <label class="form-check-label">
+                                                                        <input name="visibles[]" {{ in_array($v->id, $visible_data) ? 'checked="checked"': "" }} type="checkbox" class="form-check-input" value="{{$v->id}}"> {{$v->title}} <i class="input-helper"></i><i class="input-helper"></i>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        @endforeach
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-sm-12 text-center mt-4">
+                                                <button id="actionSubmit" value="Guardar" type="submit" class="btn btn-dark mr-2">Grabar</button>
+                                                <a href="{{ route('mcat.index', [$modulo->id]) }}" class="btn btn-light">Volver al listado</a>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    @include('email.view_html.view_html')
+
+
+                </div>
+
+
+                <!-- content-wrapper ends -->
+                <!-- partial:partials/_footer.html -->
+                @include('layout.footer')
+                <!-- end footer.php -->
+                <!-- partial -->
+            </div>
+            <!-- main-panel ends -->
+        </div>
+        <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+
+@endsection
+@section('scripts')
+    <style>
+        .hidden_email, .hidden_whatsapp{display: none;}
+    </style>
+    <script>
+        function setPickers(){
+            $sel = $('.datepicker-input');
+            if ($sel.length)
+                $sel.datepicker({
+                    enableOnReadonly: true,
+                    todayHighlight: true,
+                    format: 'dd/mm/yyyy'
+                });
+            $sel = $('.timepicker-input');
+            if ($sel.length)
+                $sel.each(function(){
+                    $(this).timepicker();
+                });
+        }
+        $('document').ready(function(){
+            setPickers();
+
+            @foreach($requireds  as $c)
+                $("#content-{{$c->id}}").data("req", 1);
+                @if(count($c->oj())>0 and isset($c->oj()["flt"]) and count($c->oj()["flt"])>0 and $c->oj()["flt"]["f"] != "" and  $c->oj()["flt"]["e"] >0 and count($c->oj()["flt"]["c"])>0  )
+                    @if($c->m_field_id ==1)
+                $("#inp-{{$c->id}}").on("keyup", function(){
+                    if(this.value == '{{$c->oj()["flt"]["f"]}}'){
+                        @if($c->oj()["flt"]["e"] == 1)
+                            @foreach($c->oj()["flt"]["c"] as $xid)
+                                $("#inp-{{$xid}}").prop("disabled", true);
+                           @endforeach
+                        @endif
+                    }else{
+                        @if($c->oj()["flt"]["e"] == 1)
+                            @foreach($c->oj()["flt"]["c"] as $xid)
+                                $("#inp-{{$xid}}").prop("disabled", false);
+                            @endforeach
+                        @endif
+                    }
+                });
+                 @endif
+            @endif
+            @endforeach
+        });
+    </script>
+
+@endsection

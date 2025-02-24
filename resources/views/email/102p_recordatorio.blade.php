@@ -1,0 +1,1 @@
+RECORDATORIO {{$evento}}

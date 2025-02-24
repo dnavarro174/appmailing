@@ -1,0 +1,131 @@
+<?php
+namespace App\Traits;
+
+use App\Models\InvImportacion;
+use App\Models\InvStudents;
+use Rap2hpoutre\FastExcel\FastExcel;
+
+trait ManageInv {
+
+    public static $fields = [
+            1 => "dni_doc", "nombres", "ap_paterno", "ap_materno", "grupo", "cargo", "profesion",
+            9 => "telefono", "celular", "email",
+            15 => "email_labor", "organizacion", "pais", "region"
+        ];
+
+    public function generateImport($id)
+    {
+        $invImportacion = InvImportacion::findOrFail($id);
+        $file = $invImportacion->file;
+        $fields_string = $invImportacion->fields;
+        $format_date = $invImportacion->format;
+        $excluded = $invImportacion->excluir_dni;
+        $import_id = $invImportacion->id;
+
+        $is_first = $invImportacion->is_first;
+        $first_row = 0;
+
+        if($is_first == 1) $first_row = $invImportacion->first_row ?? 1;
+        $current_imports= 0;
+        $total_imports = 0;
+        $total = 0;
+        $total_imports = 0;
+        $fields_tmp = explode(',', $fields_string) ?? [];
+        $fields = [];
+        //dd($fields_tmp, $this->fields);
+        foreach ($fields_tmp as $f){
+            $xx = self::$fields[$f] ?? "";
+            array_push($fields, trim($xx) ?? '');
+        }
+        //InvStudents::whereIn('import_id', [0, $import_id])->delete();
+
+        InvStudents::where('import_id', $import_id)->delete();
+        $errors = 0;
+        $oks = 0;
+
+        $file = public_path($file);
+
+        $r = (new FastExcel)->withoutHeaders()->import($file, function ($line)use(
+            &$results, &$current_imports, &$total, &$total_imports, &$errors, &$oks, $fields, $excluded, $import_id, $first_row
+        ){
+            $total++;
+            $values = array_values($line);
+            $data = [];
+            foreach (self::$fields as $v)$data[$v] = '';
+            foreach ($fields as $i => $v)
+                if($v!='')$data[$v] = $values[$i];
+            $results[0][] = $values;
+            $errorInfo = 'VACIO';
+
+            $error = $this->validaInUser($data, $excluded, $import_id);
+            $procesa = ($total>=$first_row)?1:0;
+            if($procesa)if($error>0)$errors++;else $oks++;
+
+            try {
+                $data['import_id'] = $import_id;
+                $data['error'] = $error;
+                if($procesa){
+                    $invStudent = InvStudents::create($data);
+                    $total_imports++;
+                }
+            } catch (\Illuminate\Database\QueryException $exception) {
+                $errorInfo = $exception->errorInfo;
+            }catch (\Exception $exception) {
+                $errorInfo = $exception->errorInfo;
+            }
+            return ($line);
+        });
+        $invImportacion->procesado = $total_imports;
+        $invImportacion->total = $total;
+        $invImportacion->error = $errors;
+        $invImportacion->oks = $oks;
+        $invImportacion->estado = 1;
+        $invImportacion->save();
+        //if(\File::exists($file))\File::delete($file);
+        return $r;
+    }
+
+    private function validaInUser(&$data, $excluded, $import_id=0){
+        $dni = $data['dni_doc'] ?? '';
+        $email = $data['email'] ?? '';
+        $error = 0;
+        $celular = $data['celular'] ?? '';;
+        $data['codigo_cel'] = $celular == '' ? '' : '51';
+
+        if(!$excluded){
+            if($dni!=''){
+                if(InvStudents::firstWhere('dni_doc', $dni))$error = 5;
+            }else $error = 4;
+        }
+        if($error==0){
+            if($email != ''){
+                $email_partes = explode(" ", $email);
+                $email_temp = $email_partes[0];
+                $sanitized_email = filter_var($email_temp, FILTER_SANITIZE_EMAIL);
+                $data['email']  = filter_var($sanitized_email, FILTER_VALIDATE_EMAIL) ? $sanitized_email: '';
+                if($data['email']=='')$error = 2;else{
+                    if(InvStudents::firstWhere(['email'=> $email, 'import_id'=> $import_id]))$error = 3;
+                }
+            }else $error = 1;
+        }
+        if($error == 0){
+            //FECHA NACIMIENTO
+        }
+        return $error;
+    }
+    function setTotalsImport($import_id){
+        $data = InvStudents::select('error', \DB::raw('count(*) as total'))->where('import_id', $import_id)
+            ->groupBy('error')
+            ->pluck('total', 'error')->toArray();
+        $ok = 0;
+        $error = 0;
+        if($data){
+            foreach ($data as $e=>$total) {
+                if($e==0)$ok+=$total;
+                else $error+=$total;
+            }
+        }
+        return compact('data', 'ok', 'error');
+
+    }
+}

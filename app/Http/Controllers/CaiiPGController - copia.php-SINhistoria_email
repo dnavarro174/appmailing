@@ -1,0 +1,546 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+use DB;
+use Carbon\Carbon;
+use Jenssegers\Date\Date;
+use App\Evento;
+use App\Estudiante;
+use App\Entidade;
+use App\Foros;
+use App\Newsletter;
+use App\Departamento;
+use App\ConsultaDNI;
+
+use Illuminate\Support\Facades\Crypt;
+use App\AccionesRolesPermisos;
+use Mail;
+use Excel;
+use Alert;
+use Auth;
+use PhpParser\Node\Expr\Cast\Object_;
+
+class CaiiPGController extends Controller
+{
+
+    public function index(Request $request)
+    {
+        try {
+            
+            if(isset($request->id)){
+                $eventos_id = $request->id;
+            }else{
+
+                alert()->success('El código del evento no existe', 'Advertencia');
+                return redirect()->route('caii.index');
+            }
+
+            return redirect('evento/caii_pg/create', compact('eventos_id'));
+
+        } catch (Exception $e) {
+            return 'Error';
+        }
+
+    }
+
+    public function create(Request $request){dd('abc');}
+
+    public function formulario_caii($id_evento, $modalidad,$tipo_est){
+        $n = Evento::join('e_plantillas as p', 'eventos.id', '=', 'p.eventos_id')
+                    ->join('e_formularios as f', 'eventos.id','=','f.eventos_id')
+                    ->where('eventos.id', $id_evento)->where('eventos_tipo_id',1)->count();
+                    if($n == 0)return abort(404);
+                    
+            $tipos = DB::table('tipo_documento')->get();
+            $grupos = DB::table('est_grupos')->whereNotNull('eventos_id')->get();
+            #dd($grupos);
+            $datos = DB::table('eventos as e')
+                            ->join('e_plantillas as p', 'e.id', '=', 'p.eventos_id')
+                            ->join('e_formularios as f', 'e.id','=','f.eventos_id')
+                            ->where('e.id',$id_evento)
+                            ->orderBy('e.id', 'desc')
+                            ->first();
+            
+            $fecha_inicial = $datos->fechai_evento;
+            $fecha_final = $datos->fechaf_evento;
+            $f_limite = \Carbon\Carbon::parse($datos->fechaf_pre_evento);
+            $hoy = Carbon::now();
+            //return "fecha_limite: $f_limite - hoy: $hoy";
+            
+            // CIERRE DE FORM PRE INSCRITOS
+            //if($hoy >= $f_limite or $datos->vacantes <= $datos->inscritos_pre){
+            if($hoy->greaterThan($f_limite) or $datos->vacantes <= $datos->inscritos_pre){
+                    
+                /*$dias = array("Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sábado");
+                $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+         
+                $fechaf_pre_evento = $dias[Carbon::parse($datos->fechaf_pre_evento)->format('w')]." ".Carbon::parse($datos->fechaf_pre_evento)->format('d')." de ".$meses[Carbon::parse($datos->fechaf_pre_evento)->format('n')-1]. " del ".Carbon::parse($datos->fechaf_pre_evento)->format('Y');
+
+                return view('evento.insc_cerrado',compact('datos', 'fechaf_pre_evento'));*/
+                $salida = view('evento.insc_cerrado',compact('datos'));
+                return $salida;
+            }
+
+            $countrys = DB::table('country')->select('name','phonecode')->orderBy('name','ASC')->get();
+            $departamentos = Departamento::departamentos(51);
+
+            $salida = view('evento.caii_pg', compact('countrys', 'departamentos', 'tipos', 'grupos', 'datos', 'id_evento', 'modalidad','tipo_est', 'fecha_inicial','fecha_final'));
+            #dd($salida);
+            return $salida;
+    }
+
+    public function create_presencial(Request $request)
+    {   
+          $id = isset($request->id) ? $request->id : 0;
+          $modalidad = isset($request->tipo) ? $request->tipo : 0;//PRESENCIAL - VIRTUAL
+          $tipo_est  = isset($request->tipo_est) ? $request->tipo_est : 1;// PREINSCRITO - INVITACION
+          #dd($id,$modalidad,$tipo_est);
+          if($id=="0" and $modalidad=="0"){return redirect('evento');}
+          #
+          if($modalidad!="A") abort(404);
+          $linkk = $this->formulario_caii($id,$modalidad,$tipo_est);
+          #dd($linkk);#$id,$modalidad,$tipo_est
+          return  $linkk;
+    }
+
+    public function create_virtual(Request $request)
+    {   
+          $id = isset($request->id) ? $request->id : 0;
+          $modalidad = isset($request->tipo) ? $request->tipo : 0;//PRESENCIAL - VIRTUAL
+          $tipo_est  = isset($request->tipo_est) ? $request->tipo_est : 1;// PREINSCRITO - INVITACION
+          
+          if($id=="0" and $modalidad=="0"){return redirect('evento');}
+          if($modalidad!="V") abort(404);
+        
+          $linkk = $this->formulario_caii($id,$modalidad,$tipo_est);
+          return $linkk;
+    }
+
+    function validar_fecha_espanol($fecha){
+      $valores = explode('/', $fecha);
+      if(count($valores) == 3 && checkdate($valores[1], $valores[0], $valores[2])){
+          return true;
+      }
+      return false;
+    } 
+
+    public function getDepartamentos(Request $request,$id){
+        if($request->ajax()){
+            $provincias = Departamento::departamentos($id);
+            return response()->json($provincias);
+        }
+    }
+
+
+    public function getDNI(Request $request,$id,$evento=0){
+        if($request->ajax()){
+            //$selectDNI = ConsultaDNI::selectDNI($id,$evento); 
+
+            $datos = Estudiante::join('estudiantes_act_detalle as de','estudiantes.dni_doc','=','de.estudiantes_id')
+                            ->select('estudiantes.tipo_id','estudiantes.dni_doc','estudiantes.nombres','estudiantes.ap_paterno','estudiantes.ap_materno','estudiantes.pais','estudiantes.region','estudiantes.organizacion','estudiantes.cargo','estudiantes.profesion','estudiantes.celular','estudiantes.email','de.eventos_id','estudiantes.grupo','estudiantes.codigo_cel')
+                            ->where('de.estudiantes_id',$id)
+                            //->where('de.eventos_id',$evento)
+                            ->get();
+            
+            // HIDE EMAIL Y CELL
+            function hideEmail($email){
+                $prefix = substr($email, 0, strrpos($email, '@'));
+                $suffix = substr($email, strripos($email, '@'));
+                $len  = floor(strlen($prefix)/2);
+
+                return substr($prefix, 0, $len) . str_repeat('*', $len) . $suffix;
+            }
+
+            function hideCel($number){
+                return substr($number, 0, 3) . '***' . substr($number,  -3);
+            }
+            if(count($datos) > 0){
+                $d_email = hideEmail($datos[0]->email);
+                $d_cel = hideCel($datos[0]->celular);
+                $xdatos = array(
+                    'email'     => $d_email,
+                    'celular'   => $d_cel
+                );
+            }else{
+                $xdatos = array();
+            }
+
+            return compact('datos','xdatos');
+            //return response()->json($datos);
+        }
+    }
+
+    public function store(Request $request)
+    {
+        
+        $request->validate([
+                'dni_doc'    =>  'required',
+                'nombres'    =>  'required',
+                'ap_paterno' =>  'required',
+                'ap_materno' =>  'required',
+                'grupo'      =>  'required',
+                'pais'       =>  'required',
+                'profesion'   =>  'required',
+                'organizacion'=>  'required',
+                'cargo'      =>  'required',
+                'codigo_cel' =>  'required',
+                'celular'    =>  'numeric|digits:9|min:9',
+                'email'      =>  'string|email|max:255',
+            ]);
+        
+        $xemail   = "";
+        $xcelular = "";
+        
+        if($request->input('email'))
+        {
+            $xemail = $request->input('email');
+        }else{
+            $xemail = $request->input('xemail');
+        }
+        if($request->input('celular'))
+        {
+            $xcelular = $request->input('celular');
+        }else{
+            $xcelular = $request->input('xcelular');
+        }
+
+        $id_evento = $request->input('eventos_id');
+        $dni       = $request->dni_doc?$request->dni_doc:'';
+        $modalidad = $request->modalidad=="A"?1:2;
+        $tipo_est  = $request->tipo_est==1?1:2;;//1:PREINSCRITO - 2:INVITACION
+        $codcel    = $request->codigo_cel?$request->codigo_cel:'';
+
+        #if($modalidad=="A")
+        if($modalidad==1)
+            $ruta_redireccion = redirect()->route('caii_pg_presencial.create', ['id'=>$id_evento, 'tipo'=>'A'])->with('dni', 'Sus datos ya se encuentran registrados.');
+        else
+            $ruta_redireccion = redirect()->route('caii_pg_virtual.create', ['id'=>$id_evento, 'tipo'=>'V'])->with('dni', 'Sus datos ya se encuentran registrados.');
+
+        $check_est = Estudiante::where('dni_doc', $request->input('dni_doc'))->count();
+
+        if($check_est == 0){
+            // guardar
+            if(!is_null($request->check_auto)){
+                // no check
+            }else{
+                // si acepta : Autorizo de manera expresa 
+            }
+
+                DB::table('estudiantes')->insert([
+                     'dni_doc'=>$request->input('dni_doc'),
+                     'ap_paterno'=>mb_strtoupper($request->input('ap_paterno')),
+                     'ap_materno'=>mb_strtoupper($request->input('ap_materno')),
+                     'nombres'=>mb_strtoupper($request->input('nombres')),
+                     'grupo'=>mb_strtoupper($request->input('grupo')),
+                     'cargo'=>mb_strtoupper($request->input('cargo')),
+                     'organizacion'=>mb_strtoupper($request->input('organizacion')),
+                     'profesion'=>mb_strtoupper($request->input('profesion')),
+                     'codigo_cel'=>mb_strtoupper($request->input('codigo_cel')),
+                     'celular'=>$xcelular,
+                     'email'=>$xemail,
+                     'accedio'  => 'NO',
+                     'estado'   => 1,
+                     'pais'=>mb_strtoupper($request->input('pais')),
+                     'region'=>mb_strtoupper($request->input('region')),
+                     'tipo_id'=>1,
+                     'tipo_documento_documento_id'=>$request->input('tipo_doc'),
+                     'ip'=>request()->ip(),//$_SERVER["REMOTE_ADDR"],
+                     'navegador' => get_browser_name($_SERVER['HTTP_USER_AGENT']),
+                     'updated_at'=>Carbon::now(),
+                     'created_at'=>Carbon::now()
+                ]);
+
+                DB::table('eventos')->where('id', $request->input('eventos_id'))
+                                      ->increment('inscritos_pre', 1);
+                
+                $check_new = Newsletter::where('estudiante_id', $request->input('dni_doc'))->count();
+
+                if($check_new == 0){
+
+                    DB::table('newsletters')->insert([
+                         'estado'=>'1',
+                         'estudiante_id'=>$request->input('dni_doc'),
+                         'created_at'=>Carbon::now(),
+                         'updated_at'=>Carbon::now()
+                    ]);
+                }
+
+                DB::table('estudiantes_act_detalle')->insert([
+                 'estudiantes_id'   => mb_strtoupper($request->dni_doc),
+                 'eventos_id'       => $request->eventos_id,
+                 'actividades_id'   => 0,
+                 'estudiantes_tipo_id'=> $tipo_est,//1:PREINSCRITO - 2:INVITACION
+                 'modalidad_id'     => $modalidad,//1:PRESENCIAL - 2:VIRTUAL
+                 'confirmado'       => 0,
+                 'estado'           => 1,
+                //'fecha_conf'      => Carbon::now(),
+                'dgrupo'            => mb_strtoupper($request->grupo),
+                'created_at'        => Carbon::now(),
+                'daccedio'          => 'NO',
+                'dtrack'            => ''
+                ]);
+
+        }else{
+            // actualizar
+
+            $check_est = Estudiante::where('dni_doc', $request->input('dni_doc'))
+                        ->join('estudiantes_act_detalle','estudiantes_act_detalle.estudiantes_id','=','estudiantes.dni_doc')
+                        //->where('tipo_id',1) // tipo: pre inscritos
+                        //->orWhere('tipo_id',2) // tipo: INVITADOS
+                        ->where('estudiantes_act_detalle.eventos_id',$request->input('eventos_id'))
+                        ->count();
+            
+            if($check_est >= 1){
+                return $ruta_redireccion;
+            }
+
+
+            if(!is_null($request->check_auto)){
+                // no check
+            }else{
+                // si acepta : Autorizo de manera expresa 
+            }
+
+
+                DB::table('estudiantes')->where('dni_doc',$request->input('dni_doc'))->update([
+                     
+                     'ap_paterno'=>mb_strtoupper($request->input('ap_paterno')),
+                     'ap_materno'=>mb_strtoupper($request->input('ap_materno')),
+                     'nombres'=>mb_strtoupper($request->input('nombres')),
+                     //'grupo'=>mb_strtoupper($request->input('grupo')),
+                     'cargo'=>mb_strtoupper($request->input('cargo')),
+                     'organizacion'=>mb_strtoupper($request->input('organizacion')),
+                     'profesion'=>mb_strtoupper($request->input('profesion')),
+                     'codigo_cel'=>mb_strtoupper($request->input('codigo_cel')),
+                     'celular'=>$xcelular,
+                     'email'=>$xemail,
+                     'accedio'  =>'NO',
+                     'estado'   => 1,
+                     'pais'=>mb_strtoupper($request->input('pais')),
+                     'region'=>mb_strtoupper($request->input('region')),
+                     'tipo_id'=>1,
+                     'tipo_documento_documento_id'=>$request->input('tipo_doc'),
+                     'ip'=>request()->ip(),//$_SERVER["REMOTE_ADDR"],
+                     'navegador' => get_browser_name($_SERVER['HTTP_USER_AGENT']),
+                     'updated_at'=>Carbon::now(),
+                     'created_at'=>Carbon::now()
+                ]);
+
+                $autoincrem = DB::table('eventos')->where('id', $request->input('eventos_id'))
+                                    ->increment('inscritos_pre', 1);
+                
+                
+                $check_new = Newsletter::where('estudiante_id', $request->input('dni_doc'))->count();
+
+                if($check_new == 0){
+
+                    DB::table('newsletters')->insert([
+                         'estado'=>'1',
+                         'estudiante_id'=>$request->input('dni_doc'),
+                         'created_at'=>Carbon::now(),
+                         'updated_at'=>Carbon::now()
+                    ]);
+                }
+            
+            DB::table('estudiantes_act_detalle')->where('estudiantes_id',$request->input('dni_doc'))
+                                    ->where('eventos_id',$request->input('eventos_id'))
+                                    ->where('estudiantes_tipo_id', 1)
+                                    ->delete();
+
+            DB::table('estudiantes_act_detalle')->insert([
+                 'estudiantes_id'       => mb_strtoupper($request->input('dni_doc')),
+                 'eventos_id'           => $request->input('eventos_id'),
+                 'actividades_id'       => 0,
+                 'estudiantes_tipo_id'  => $tipo_est,//1:PREINSCRITO - 2:INVITACION
+                 'modalidad_id'         => $modalidad,//1:PRESENCIAL - 2:VIRTUAL
+                 'confirmado'           => 0,
+                 'estado'               => 1,
+                //'fecha_conf'          => Carbon::now(),
+                'dgrupo'                => mb_strtoupper($request->input('grupo')),
+                'created_at'            =>Carbon::now(),
+                'daccedio'              => 'NO',
+                'dtrack'                => ''
+            ]);
+
+        } // fin actualizar
+        #Al finalizar la pre-inscripción, el sistema debe enviar un mailing de confirmación
+
+        $datos = \App\Evento::join('e_plantillas as p', 'eventos.id','=','p.eventos_id')
+                    ->join('e_plantillas_virtual as pv', 'eventos.id','=','p.eventos_id')
+                    ->select('eventos.auto_conf','eventos.email_id','p.p_preregistro_email','p.p_preregistro_msg','p.p_preregistro','p.p_preregistro_2','pv.p_preregistro_2_v','p.p_preregistro_asunto','pv.p_preregistro_asunto_v','p.p_conf_preregistro','pv.p_conf_preregistro_v')
+                    ->where('eventos.id', $id_evento)
+                    ->where('p.eventos_id', $id_evento)
+                    ->where('pv.eventos_id', $id_evento)
+                    ->first();
+        
+        if($datos->auto_conf==1 and $datos->email_id!=""){
+            $flujo_ejecucion = 'PREREGISTRO';
+            $asunto = '[CONFIRMACIÓN PG] ';
+            $nom = mb_strtoupper($request->input('nombres'))." ".mb_strtoupper($request->input('ap_paterno'));
+
+            $rs_estudiante = [
+                'email'     => $xemail,
+                'dni_doc'   => $dni,
+                'nombres'   => $nom,
+                'ap_paterno'=> '',
+                'ap_materno'=> '',
+                'celular'   => $xcelular,
+                'codigo_cel'=> $codcel,
+            ];
+            $rs_estudiante = (object) $rs_estudiante;
+            $tipo = 'p_preregistro';
+            $flujo_ejecucion = 'PREREGISTRO';
+            $mod_desde = "F_PRE";
+            #bajaEvento($modalidad, $rs_estudiante, $rs_datos,$tipo,session('eventos_id'));
+            creaHitoria_email($modalidad, $rs_estudiante, $datos,$tipo,$id_evento,$flujo_ejecucion,$mod_desde);
+            /*
+            $from_name  = $datos->Email->nombre;
+            $from_email = $datos->Email->email;
+            
+            // PRESENCIAL 
+            if($modalidad==1){
+                $asunto = $datos->p_preregistro_asunto;
+                $msg_text = $datos->p_conf_preregistro;// plantila email
+            }else{
+                // VIRTUAL
+                $asunto = $datos->p_preregistro_asunto_v;
+                $msg_text = $datos->p_conf_preregistro_v;// plantila email
+            }
+            $confirm_email = $datos->p_preregistro_email;
+            $confirm_msg   = $datos->p_preregistro_msg;
+            
+            if($confirm_email==1){
+                #Envio de mensaje Email
+               
+                $celular  = "";
+                $email    = $xemail;
+                $msg_cel  = "";//$datos->p_preregistro_2;// plantila whats
+                
+                DB::table('historia_email')->insert([
+                    'tipo' =>  'EMAIL',
+                    'fecha'             => Carbon::now(),
+                    'estudiante_id'     =>$dni,
+                    'plantillaemail_id' =>$id_evento,
+                    'eventos_id'        =>$id_evento,
+                    'flujo_ejecucion'   =>$flujo_ejecucion,
+                    'fecha_envio'       =>'2000-01-01',
+                    'asunto'            =>$asunto,
+                    'nombres'           =>$nom,
+                    'celular'           =>$celular,
+                    'email'             =>$email,
+                    'msg_text'          =>$msg_text,
+                    'msg_cel'           =>$msg_cel,
+                    'from_nombre'       => $from_name,
+                    'from_email'        => $from_email,
+                    'created_at'        =>Carbon::now(),
+                    'updated_at'        =>Carbon::now()
+                ]);
+                
+            }
+            if($confirm_msg==1){
+                #Envio de mensaje Whatsapp
+
+                $celular = $codcel.$xcelular;
+                #$email = $from_email = $from_name = '';
+                $msg_text = '';//$datos->p_preregistro;// plantila emailp_preregistro_2
+                $msg_cel = $datos->p_preregistro_2;// plantila whats 
+
+                // PRESENCIAL 
+                if($modalidad==1){
+                    $asunto = $datos->p_preregistro_asunto;
+                    $msg_cel = $datos->p_preregistro_2;// plantila
+                }else{
+                    // VIRTUAL
+                    $asunto = $datos->p_preregistro_asunto_v;
+                    $msg_cel = $datos->p_preregistro_2_v;// plantila
+                }
+                
+                if($xcelular != "" && strlen($celular)>= 9){
+
+                    DB::table('historia_email')->insert([
+                        'tipo' =>  'WHATS',
+                        'fecha'             => Carbon::now(),
+                        'estudiante_id'     =>$dni,
+                        'plantillaemail_id' =>$id_evento,
+                        'eventos_id'        =>$id_evento,
+                        'flujo_ejecucion'   =>$flujo_ejecucion,
+                        'fecha_envio'       =>'2000-01-01',
+                        'asunto'            =>$asunto,
+                        'nombres'           =>$nom,
+                        'celular'           =>$celular,
+                        'email'             =>$email,
+                        'msg_text'          =>$msg_text,
+                        'msg_cel'           =>$msg_cel,
+                        'from_nombre'       => $from_name,
+                        'from_email'        => $from_email,
+                        'created_at'        =>Carbon::now(),
+                        'updated_at'        =>Carbon::now()
+                    ]);
+                }
+
+                
+            }
+            */
+        }
+        return redirect()->route('caii_pg.gracias_pg',array('id'=>$id_evento,'dni_doc'=>$dni));
+    }
+
+
+    public function show($id)
+    {
+        //
+    }
+
+    public function gracias_pg(Request $request){
+
+        $id_evento = $request->id;
+        $dni_doc   = $request->dni_doc;
+        
+        $estudiante = Estudiante::join('estudiantes_act_detalle as de','estudiantes.dni_doc','=','de.estudiantes_id')
+        ->where('de.estudiantes_id', $dni_doc)
+        ->where('de.eventos_id',$id_evento)
+        ->first();
+
+        // PRESENCIAL
+        if($estudiante->modalidad_id==1){
+           
+            $datos = DB::table('eventos as e')
+                    ->join('e_plantillas as p', 'e.id','=','p.eventos_id')
+                    #->select('e.p_preregistro')
+                    ->where('e.id', $id_evento)->first();
+        }else{
+            // VIRTUAL
+            
+            $datos = DB::table('eventos as e')
+                    ->join('e_plantillas as p', 'e.id','=','p.eventos_id')
+                    ->join('e_plantillas_virtual as pv', 'e.id','=','pv.eventos_id')
+                    ->select('pv.p_preregistro_v as p_preregistro')
+                    ->where('e.id', $id_evento)->first();
+        }
+
+        if(!$datos){
+            return redirect()->back();
+        }
+
+        return view('evento.gracias_pg', compact('datos'));
+    }
+
+
+    public function edit($id)
+    {
+        //
+    }
+
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    public function destroy($id)
+    {
+        //
+    }
+}

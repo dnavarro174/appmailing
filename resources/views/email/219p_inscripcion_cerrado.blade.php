@@ -1,0 +1,1 @@
+Se cerraron las inscripciones al evento.

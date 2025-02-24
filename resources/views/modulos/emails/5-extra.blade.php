@@ -1,0 +1,180 @@
+<meta charset="utf-8">
+
+
+<span style="font-size: 12.8px;"><b>DESDE PRINCIPAL</b></span><table width="650" border="0" cellspacing="0" cellpadding="0" align="center">
+  <tbody>
+    <tr>
+      <td><img src="http://enc-ticketing.org/tkt/images/img_caii/header_logos.jpg" alt="" width="650" height="99"></td>
+    </tr>
+  </tbody>
+</table>
+<table align="center" width="650" cellspacing="0">
+  <tbody><tr>
+    <td align="center"><img src="http://enc-ticketing.org/tkt/images/img_caii/header.jpg" alt="" width="650" height="353" align="right"></td>
+  </tr>
+  <tr>
+    <td height="20px"></td>
+  </tr>
+  <tr>
+    <td height="20px" align="center"><font style="font-size: 21px; font-family: arial"><font size="5" color="#000" face="arial">
+      {{ $nombres }}
+    </font><br>
+      <br>
+      Usted ha sido inscrito en el siguiente evento:<br>
+      <strong>Conferencia Anual Internacional por la Integridad - CAII</strong></font></td>
+  </tr>
+  <tr>
+    <td height="20px"></td>
+  </tr>
+  <tr>
+    <td height="20px" align="center"><table width="600" height="210" border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+          <tr>
+            <td align="center" valign="middle" bgcolor="#efebeb"><table width="450" border="0" cellspacing="0" cellpadding="0">
+                <tbody>
+                  <tr>
+                    <td height="40px" align="center" valign="bottom"><table width="364" border="0" cellspacing="0" cellpadding="0">
+                        <tbody>
+                          <tr>
+                            <td width="89" valign="bottom" height="84"><img src="http://enc-ticketing.org/tkt/images/img_caii/user-opc1.png" alt="" width="80" height="78"></td>
+                            <td width="112" valign="bottom"><font color="#556884" style="font-size: 16px; font-family: arial">Usuario<strong><br>
+                              {{ $usuario }}</strong></font></td>
+                            <td width="71"><img src="http://enc-ticketing.org/tkt/images/img_caii/pass-opc1.png" alt=""></td>
+                            <td width="92" valign="bottom"><font color="#556884" style="font-size: 16px; font-family: arial">Contraseña<strong><br>
+                              {{ $pass }}</strong></font></td>
+                          </tr>
+                          <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                          </tr>
+                        </tbody>
+                      </table></td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: center"><font style="font-size: 16px; font-family: arial; text-align: center">Para confirmar su inscripción es necesario validar sus datos y elegir los foros de su mayor interés.</font></td>
+                  </tr>
+                  <tr>
+                    <td height="40px" align="center" valign="bottom"><a href="http://enc-ticketing.org/tktv2/public/evento/" target="_blank"><img src="http://enc-ticketing.org/tkt/images/img_caii/bot_valid.png" alt="" width="162" height="33"></a></td>
+                  </tr>
+                </tbody>
+              </table></td>
+          </tr>
+        </tbody>
+      </table></td>
+  </tr>
+  <tr>
+    <td height="20px"></td>
+  </tr>
+</tbody></table>
+<table align="center" width="650  " bgcolor="white" cellspacing="0">
+  <tbody><tr>
+    <td><table width="650" border="0" cellspacing="0">
+        <tbody>
+          <tr>
+            <td><br></td>
+          </tr>
+          <tr>
+            <td><img src="http://enc-ticketing.org/tkt/images/img_caii/line-1.jpg" alt="line" width="278" height="32"></td>
+          </tr>
+          <tr>
+            <td><br></td>
+          </tr>
+          <tr>
+            <td><table width="650" border="0" cellspacing="0" cellpadding="0">
+                <tbody>
+                  <tr>
+                    <td width="34">&nbsp;</td>
+                    <td width="582">
+                      <p style="font-size: 14px; font-family: arial;text-align: justify;">
+                        La CAII 2018 es organizada por la Contraloría General&nbsp; de la República del Perú y tiene como objetivo promover un compromiso interinstitucional orientado a fortalecer la función de&nbsp; prevenir la corrupción, a través de la&nbsp;estimulación del debate sobre mecanismos innovadores&nbsp; y cada vez más eficientes en materia de prevención de la inconducta funcional y la corrupción, orientados a la generación de valor&nbsp;público. 
+                      </p>
+                      <p style="font-family: Arial;font-weight: bold;">
+                        <a href="http://doc.contraloria.gob.pe/demo/CAII/esp/index.html#agenda" target="_blank" style="text-decoration: none;">Ver programa - ESP</a> /
+                        <a href="http://doc.contraloria.gob.pe/demo/CAII/eng/index.html#agenda" target="_blank" style="text-decoration: none;">View program - ENG</a><br>
+                        <!-- <a href="http://enc-ticketing.org/tktv2/public/pdf/agenda_caii_2018.pdf" target="_blank" style="text-decoration: none;"> -->
+                      </p>
+                    </td>
+                    <td width="34">&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td><br></td>
+                    <td><br></td>
+                    <td><br></td>
+                  </tr>
+                </tbody>
+              </table>
+              <table width="650" border="0" cellspacing="0" cellpadding="0" align="center">
+                <tbody>
+                  <!--<tr>
+                    <td width="34">&nbsp;</td>
+                    <td width="366" style="font-family:Arial"><p><font style="font-size: 16px"><strong>06 y 07 de diciembre de 2017 | 8:30 - 18:00 hrs.</strong></font><br>
+                        <font style="font-size: 13px">Auditorio</font><font style="font-size: 13px"><br>
+                        Escuela Nacional de Control<br>
+                        Jr. Bartolomé Herrera #255 - Lince, Lima - Perú<br>
+                        <strong style="font-size: 14px"><a href="https://goo.gl/maps/ADffmPKK6TQ2" target="_blank" style="text-decoration: none">Ver mapa</a></strong><br>
+                        <br>
+                        </font></p></td>
+                    <td width="13" style="border-left: solid 1px #ccc"></td>
+                    <td width="84" valign="bottom"><a href="#"><img src="https://2.bp.blogspot.com/-ClZBSihekqU/WhMrjr9TVbI/AAAAAAAAFBM/LHKEjYflgQUIAEmwXoXPaJLy7Lb8Bzz-ACLcBGAs/s1600/icon_pro.jpg" alt="" width="76" height="70" /></a></td>
+                    <td width="153" valign="bottom" ><font style="font-family:Arial; font-size: 14px"><strong><a href="#" target="_blank" style="text-decoration: none">Ver<br>
+                      programación<br>
+                      del evento</a></strong></font></td>
+                  </tr>-->
+                  <tr>
+                    <td>&nbsp;</td>
+                    <td style="font-family:Arial"><a href="http://doc.contraloria.gob.pe/demo/CAII/esp/" target="_blank"><img src="http://enc-ticketing.org/tkt/images/img_caii/bot_web.png" alt="" width="160" height="31" border="0"></a></td>
+                    <td></td>
+                    <td valign="bottom">&nbsp;</td>
+                    <td valign="bottom">&nbsp;</td>
+                  </tr>
+                </tbody>
+              </table></td>
+          </tr>
+        </tbody>
+      </table></td>
+  </tr>
+</tbody></table>
+
+<!--<table width="650" border="0" cellspacing="0" cellpadding="0" align="center">
+  <tbody>
+    <tr>
+      <td>&nbsp;</td>
+      <td height="10px">&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="25">&nbsp;</td>
+      <td width="596"><img src="http://enc-ticketing.org/tkt/images/img_caii/img_boton.jpg" alt="" width="170" height="39" /></td>
+      <td width="29">&nbsp;</td>
+    </tr>
+  </tbody>
+</table>
+<table width="650" border="0" cellspacing="0" cellpadding="0" align="center">
+  <tbody>
+    <tr>
+      <td height="20px" style="border-bottom: solid 1px #CCC">&nbsp;</td>
+    </tr>
+  </tbody>
+</table>
+<table width="650" border="0" cellspacing="0" cellpadding="0" align="center">
+  <tbody>
+    <tr>
+      <td width="27">&nbsp;</td>
+      <td width="150" height="30px"><font style="font-size: 14px; font-family: arial"><strong>Auspician</strong></font></td>
+      <td width="154">&nbsp;</td>
+      <td width="158">&nbsp;</td>
+      <td width="131">&nbsp;</td>
+      <td width="30">&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td><a href="https://pe.usembassy.gov/es/" target="_blank"><img src="http://enc-ticketing.org/tkt/images/img_caii/logo_eeuu.jpg" alt="" width="92" height="40" border="0" /></a></td>
+      <td><a href="http://www.iadb.org/es/banco-interamericano-de-desarrollo,2837.html" target="_blank"><img src="http://enc-ticketing.org/tkt/images/img_caii/logo_bid.jpg" alt="" border="0" /></a></td>
+      <td><a href="http://www.canadainternational.gc.ca/peru-perou/index.aspx?lang=spa" target="_blank"><img src="http://enc-ticketing.org/tkt/images/img_caii/logo_canada.jpg" alt="" width="92" height="40" border="0" /></a></td>
+      <td><a href="http://www.bancomundial.org/" target="_blank"><img src="http://enc-ticketing.org/tkt/images/img_caii/logo_bancomundial.jpg" alt="" width="92" height="40" border="0" /></a></td>
+      <td>&nbsp;</td>
+    </tr>
+  </tbody>
+</table>-->

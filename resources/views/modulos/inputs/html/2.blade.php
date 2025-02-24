@@ -1,0 +1,1 @@
+<textarea placeholder="Ingrese {{$input->title}}" class="form-control" name="inputs[{{$input->id}}]" id="inp-{{$input->id}}" cols="30" rows="5" {{$input->required?"required":""}}>{{$input->value}}</textarea>

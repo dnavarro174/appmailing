@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	<link href="https://enc-ticketing.org/comunicaciones/enconocimiento/conferencias_magistrales/modelo_integridad/fonts/BebasNeue Bold.otf" rel="stylesheet">
+	<meta charset="utf-8">
+	<style>
+@font-face {
+	font-family: "Bebas Neue Bold";
+ src: url(BebasNeue Bold.otf);
+}
+</style>
+	</head>
+	<body>
+<table align="center" width="650" bgcolor="#ffffff" border="0" cellspacing="0" cellpadding="0">
+      <tbody>
+    <tr>
+          <td width="192" align="center">&nbsp;</td>
+          <td width="192" align="center" style="border-bottom: solid 1px #fff"><img src="https://enc-ticketing.org/comunicaciones/encomunicacion/CAII2019/encabezado.png" alt="" width="630" height="96" border="0" /></td>
+          <td width="192" align="center">&nbsp;</td>
+        </tr>
+  </tbody>
+    </table>
+<table align="center" width="650" bgcolor="#ffffff" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+    <td><table align="center" width="580" border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+          <tr>
+            <td height="30px">&nbsp;</td>
+          </tr>
+          <tr>
+            <td font style><p align="center" style="font-family: 'Calibri'; font-size: 40px; color: #00418B"><strong>EVENTO CERRADO / EVENT CLOSED</strong><br>
+            <p align="center" style="font-family: 'Calibri'; font-size: 30px; color: #00418B; text-align: justify;)">Lamentamos informarle que la Conferencia Anual Internacional por la Integridad - CAII 2019 ha finalizado.<br></p>
+            <p align="center" style="font-family: 'Calibri'; font-size: 30px; color: #00418B; text-align: justify;)">Lo esperamos el próximo año.
+				<br> <br> <p align="center" style="font-family: 'Calibri'; font-size: 20px; color: #0054B3; text-align: justify;)">We regret to inform you that the International Annual Conference for Integrity - CAII 2019 has ended.
+				<br> <br> We wait for you next year.<br>
+            </p></td>
+          </tr>
+          <tr>
+            <td height="30px">&nbsp;</td>
+          </tr>
+        </tbody>
+      </table>
+          
+          <!--<img src="img/header.png" alt="" width="650" height="201" align="right">--></td>
+  </tr>
+      <tr>
+    <td style="font-family:arial"><table width="650" border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+        </tbody>
+      </table></td>
+  </tr>
+    </table>
+<table  align="center" width="650" bgcolor="#ffffff" border="0" cellspacing="0" cellpadding="0" >
+      <tr>
+    <td align="center" valign="middle"></td>
+  </tr>
+      <tr>
+    <td height="20px"></td>
+  </tr>
+    </table>
+<table align="center" width="650" border="0" cellspacing="0" cellpadding="0" bgcolor="#eaeaea" link="#ffffff" vlink="#ffffff" alink="#ffffff" >
+      <tr>
+    <td width="32"></td>
+    <td width="261" style="border-top: solid 1px #fff"><img src="https://enc-ticketing.org/comunicaciones/encomunicacion/CAII2019/copy_ENC.png" target="_blank" width="261" height="39" alt=""></td>
+    <td width="153" style="border-top: solid 1px #fff" align="center"><a href="http://www.enc.edu.pe/" target="_blank"><img src="https://enc-ticketing.org/comunicaciones/encomunicacion/CAII2019/logo_ENC.jpg" alt="" width="120" height="71" /></a></td>
+    <td width="182" style="border-top: solid 1px #fff"><a href="http://www.contraloria.gob.pe/wps/portal/portalcgrnew/siteweb/inicio/" target="_blank"><img src="https://enc-ticketing.org/comunicaciones/encomunicacion/CAII2019/logo_CGR.png" alt="" width="170" height="44" /></a></td>
+    <td width="22">&nbsp;</td>
+  </tr>
+    </table>
+</body>
+</html>

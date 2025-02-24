@@ -1,0 +1,371 @@
+<html>
+<head>
+<meta charset="utf-8">
+</head>
+
+<body>
+<table align="center" width="650" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td><img src="http://enc-ticketing.org/tkt/images/img_caii/header_logos.jpg" alt="" width="650" height="99" /></td>
+    </tr>
+  </tbody>
+</table>
+<table align="center" width="650" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td><img src="http://enc-ticketing.org/tkt/images/img_caii/header.jpg" alt="" width="650" height="353"></td>
+    </tr>
+    <tr>
+      <td bgcolor="white" align="center" style="padding:20px 50px 0px 50px"><br>
+        <font size="5" color="#000" face="arial"> ¡ Nombre y Apellido !</font><br>
+        <font size="3" color="#000" face="arial"><br>
+        Su registro a la <strong>Conferencia Anual Internacional por la Integridad - CAII</strong> ha sido confirmado</font><br>
+        <br>
+        <table width="500" border="0" cellspacing="0" cellpadding="0">
+          <tbody>
+            <tr>
+              <td><font size="2" color="#000" face="arial">
+                <ul>
+                  <li>Para ingresar deberá presentar su documento de identidad</li>
+                  <li>Descargue e imprima su GAFETE adjunto a este correo, será su identificador para ingresar a las conferencias magistrales y foros</li>
+                  <li>Al registrar su asistencia se le entregará un portagafete</li>
+                </ul>
+                </font></td>
+            </tr>
+          </tbody>
+        </table></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<table align="center" width="650" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><img src="http://enc-ticketing.org/tkt/images/img_caii/line-1.jpg" alt="" width="278" height="32" /></td>
+  </tr>
+  <tr>
+    <td><br></td>
+  </tr>
+  <tr>
+    <td><table width="650" border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+          <tr>
+            <td width="34">&nbsp;</td>
+            <td width="582"><font style="font-size: 14px; font-family: arial;text-align: justify">Las CAAI 2018 es organizada por la Contraloría General de la República  del Perú y tiene como objetivo promover la integración de una guía de compromisos interinstitucionales orientados a fortalecer la función de prevenir la corrupción en la región, a través de la estimulación del debate sobre mecanismos innovadores y cada vez más eficientes en materia de prevención de la corrupción, orientados a la generación de valor público.</font><br>
+              <br>
+              <!--<a href="http://doc.contraloria.gob.pe/demo/CAAI-2017_2/index.html" target="_blank"><img src="http://enc-ticketing.org/tkt/images/img_caii/bot_web.jpg" alt="" border="0" /></a>--></td>
+            <td width="34">&nbsp;</td>
+          </tr>
+          <tr>
+            <td><br></td>
+            <td><br></td>
+            <td><br></td>
+          </tr>
+        </tbody>
+      </table>
+      <table width="650" border="0" cellspacing="0" cellpadding="0" align="center">
+        <tbody>
+          <tr>
+            <td width="10">&nbsp;</td>
+            <td width="612" style="font-family:Arial"><table align="center" width="561" border="0" cellspacing="0" cellpadding="0">
+                <tbody>
+                  <tr>
+                    <td width="112" align="center"><img src="http://enc-ticketing.org/tkt/images/img_caii/icon_calendar.png" alt="" width="59" height="60" /></td>
+                    <td width="161" align="center"><img src="http://enc-ticketing.org/tkt/images/img_caii/icon_clock.png" alt="" width="59" height="60" /></td>
+                    <td width="182" align="center"><img src="http://enc-ticketing.org/tkt/images/img_caii/icon_place.png" alt="" width="59" height="60" /></td>
+                    <td width="106" align="center"><img src="http://enc-ticketing.org/tkt/images/img_caii/ico_pro.png" alt="" width="59" height="60" /></td>
+                  </tr>
+                  <tr>
+                    <td align="center" height="30px"><font style="font-size: 12px"><strong>06 y 07 de diciembre</strong></font></td>
+                    <td align="center" height="30px"><font style="font-size: 12px"><strong>Hora de ingreso: 07:30<br>
+                      Hora de registro: 08:00<br>
+                      Hora de inicio: 09:00</strong></font></td>
+                    <td align="center" height="30px"><font style="font-size: 12px"><strong>Centro de Convenciones<br>
+                      “27 de Enero”<br>
+Av. La Arqueología 206,<br>
+San Borja - Lima</strong><br>
+                      <strong style="font-size: 12px"><a href="https://goo.gl/maps/XhnQ2c4ne342" target="_blank" style="text-decoration: none">Ver mapa</a></strong> </font></td>
+                    <td align="center" height="30px"><font style="font-size: 12px"><strong><a href="https://drive.google.com/open?id=1ZdG4eLoJ_osfYjLi567J5CLbkoo1aY6B" target="_blank" style="text-decoration: none">Ver
+                      programa<br>
+                      del evento</a></strong></font></td>
+                  </tr>
+                </tbody>
+              </table>
+              <br>
+              <table align="center" border="0" cellspacing="0" cellpadding="0" >
+                <tr>
+                  <td width="190" height="30px"><font size="2" color="#4f4f4f" face="Arial"><strong>Síguenos en:</strong></font></td>
+                  <td width="223"></td>
+                </tr>
+                <tr>
+                  <td align="center" height="30px"><font size="2" color="#4f4f4f" face="Arial">Contraloría General</font></td>
+                  <td align="center" height="30px"><font size="2" color="#4f4f4f" face="Arial">Escuela Nacional de Control</font></td>
+                </tr>
+                <tr>
+                  <td align="center"><a href="https://www.facebook.com/contraloriadelperu/" target="_blank"><img src="http://enc-ticketing.org/tkt/images/img_caii/ico_fb.png" width="30" height="30" border="0" ></a> <a href="https://twitter.com/ContraloriaPeru" target="_blank"><img src="http://enc-ticketing.org/tkt/images/img_caii/ico_TW.png" width="32" height="30" border="0"></a> <a href="https://www.flickr.com/photos/fotoscontraloriaperu/" target="_blank"><img src="http://enc-ticketing.org/tkt/images/img_caii/ico_fl.png" width="32" height="30" border="0"></a> <a href="https://www.youtube.com/user/Contraloriadelperu" target="_blank"><img src="http://enc-ticketing.org/tkt/images/img_caii/ico_yt.png" width="32" height="30" border="0"></a></td>
+                  <td align="center"><a href="https://www.facebook.com/Escuela-Nacional-de-Control-245321429240557/" target="_blank"><img src="http://enc-ticketing.org/tkt/images/img_caii/ico_fb.png" width="30" height="30" border="0" ></a> <a href="https://twitter.com/ENCContraloria" target="_blank"><img src="http://enc-ticketing.org/tkt/images/img_caii/ico_TW.png" width="32" height="30" border="0"></a> <a href="https://www.linkedin.com/in/escuela-nacional-de-control" target="_blank"><img src="http://enc-ticketing.org/tkt/images/img_caii/ico_in.png" width="30" height="30" border="0"></a> <a href="https://www.flickr.com/photos/147606161@N05/" target="_blank"><img src="http://enc-ticketing.org/tkt/images/img_caii/ico_fl.png" width="32" height="30" border="0"></a> <a href="https://www.youtube.com/channel/UCm_JIlna83tVXmZsxrQ0f6Q" target="_blank"><img src="http://enc-ticketing.org/tkt/images/img_caii/ico_yt.png" width="32" height="30" border="0"></a></td>
+                </tr>
+              </table></td>
+            <td width="28" style="font-family:Arial">&nbsp;</td>
+          </tr>
+        </tbody>
+      </table></td>
+  </tr>
+  <tr>
+    <td><br></td>
+  </tr>
+  <tr>
+    <td><br></td>
+  </tr>
+  <tr>
+    <td><img src="http://enc-ticketing.org/tkt/images/img_caii/line-5.jpg" alt="" width="278" height="32" /></td>
+  </tr>
+  <tr>
+    <td><br></td>
+  </tr>
+  <tr>
+    <td><table width="650" border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+          <tr>
+            <td width="52" height="70">&nbsp;</td>
+            <td width="570"><font style="font-family:Arial; font-size: 14px">Usted podrá obtener una constancia de participación digital emitida por la Contraloría General de la República del Perú y la Escuela Nacional de Control, <strong>si acredita por lo menos 4 asistencias</strong> de la siguiente programación:<br>
+              <br>
+              <strong>06 DIC</strong><br>
+              08:00 – 08:45	Conferencias plenarias 1  (Primera acreditación)<br>
+              14:20 – 14:30	Foros 1; 2 y 3 (Segunda acreditación)<br>
+              16:50 – 17:00	Conferencia plenaria 2 (Tercera acreditación)<br>
+              <br>
+              <strong>07 DIC</strong><br>
+              08:00 – 09:00	Conferencia plenaria 3 (Cuarta acreditación)<br>
+              13:50 – 14:00	Foros 4; 5 y 6 (Quinta acreditación)<br>
+              <br>
+              Agradeceremos acreditarse puntualmente. </font></td>
+            <td width="28">&nbsp;</td>
+          </tr>
+        </tbody>
+      </table></td>
+  </tr>
+  <tr>
+    <td><br></td>
+  </tr>
+  <tr>
+    <td><br></td>
+  </tr>
+  <tr>
+    <td><img src="http://enc-ticketing.org/tkt/images/img_caii/line-4.jpg" alt="" width="278" height="32" /></td>
+  </tr>
+  <tr>
+    <td><br></td>
+  </tr>
+  <!--<tr>
+    <td><table width="650" border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+          <tr>
+            <td width="29" height="70">&nbsp;</td>
+            <td width="47" valign="top"><img src="http://enc-ticketing.org/tkt/images/img_caii/icon-1.jpg" alt="" width="40" height="53" /></td>
+            <td width="287" valign="top"><font style="font-family:Arial; font-size: 14px"> <strong>Evitemos congestionar la ciudad.</strong><br>
+              ¡Cabify te lleva al evento!<br>
+              3 viajes de 15% de descuento para usuarios nuevos y frecuentes<br>
+              (Máximo S/ 15.00 de descuento) </font></td>
+            <td width="38">&nbsp;</td>
+            <td width="222" rowspan="2" valign="top"><font style="font-family:Arial; font-size: 14px"><strong>Descargue las aplicaciones en:</strong></font><br>
+              <table width="188" border="0" cellspacing="0" cellpadding="0">
+                <tbody>
+                  <tr>
+                    <td width="94" rowspan="2" align="center"><img src="http://enc-ticketing.org/tkt/images/img_caii/ICO_TAXI.jpg" alt="" width="70" height="70" /></td>
+                    <td width="94" height="35" valign="bottom"><a href="https://play.google.com/store/apps/details?id=com.cabify.rider&hl=es"><img src="http://enc-ticketing.org/tkt/images/img_caii/icon_googlestore.jpg" alt="" width="90" height="34" /></a></td>
+                  </tr>
+                  <tr>
+                    <td height="44" valign="middle"><a href="https://itunes.apple.com/es/app/cabify-tu-chofer-privado/id476087442?mt=8"><img src="http://enc-ticketing.org/tkt/images/img_caii/icon_appstore.jpg" alt="" width="90" height="34" /></a></td>
+                  </tr>
+                  <tr>
+                    <td rowspan="3" align="center"><img src="https://1.bp.blogspot.com/-iEwPdyC4ozU/WhMrjR5YAXI/AAAAAAAAFBI/Bm55dgzAUj0mF7eMoAuNdzFcIqKtzmf0gCLcBGAs/s1600/icon_beat.jpg" alt="" width="70" height="70" /></td>
+                    <td height="37" valign="bottom"><a href="https://bit.ly/beatdroid"><img src="https://2.bp.blogspot.com/-tS9IkJ3Jy4U/WhMrjauVQNI/AAAAAAAAFBQ/8mdeNqe9c0483kA1CH5rYZEu4BlERbA0wCLcBGAs/s1600/icon_googlestore.jpg" alt="" width="90" height="34" /></a></td>
+                  </tr>
+                  <tr>
+                    <td height="37" valign="bottom"><a href="https://bit.ly/beatapp"><img src="https://3.bp.blogspot.com/-ndITA5Ic4T4/WhMrjPUq_DI/AAAAAAAAFBE/Gy7m39t61u0bR6UuiHKdTsMt1szknZP9QCLcBGAs/s1600/icon_appstore.jpg" alt="" width="90" height="34" /></a></td>
+                  </tr>
+                </tbody>
+              </table></td>
+            <td width="27">&nbsp;</td>
+          </tr>
+          <tr>
+            <td height="72">&nbsp;</td>
+            <td>&nbsp;</td>
+            <td colspan="2"><img src="https://1.bp.blogspot.com/-bk1scv6TJms/WhMzpAAcaaI/AAAAAAAAFB0/1qft9fflJxoR9kHlUJ_8VuQ0kFH_PBGugCLcBGAs/s1600/extra_text.jpg" alt="" width="276" height="72" /></td>
+            <td>&nbsp;</td>
+          </tr>
+        </tbody>
+      </table></td>
+  </tr>
+  <tr>
+    <td><br></td>
+  </tr>
+  <tr>
+    <td><br></td>
+  </tr>
+  <tr>
+    <td><table width="650" border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+          <tr>
+            <td width="32">&nbsp;</td>
+            <td width="49" valign="top"><img src="http://enc-ticketing.org/tkt/images/img_caii/icon-2.jpg" alt="" width="40" height="53" /></td>
+            <td width="306"><font style="font-family:Arial; font-size: 14px"><b style="font-size: 17px">Sé sostenible</b><br>
+              Contamos con estacionamiento para bicicletas.<br>
+              <font style="font-size: 12px">Movilízate en bicicleta para los viajes de corta duración.<br>
+              Más sostenibles, más cómodos y más económicos.</font></font></td>
+            <td width="262">&nbsp;</td>
+          </tr>
+        </tbody>
+      </table></td>
+  </tr>
+  <tr>
+    <td><br></td>
+  </tr>
+  <tr>
+    <td><br></td>
+  </tr>-->
+  <tr>
+    <td><table align="center" width="650" border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+          <tr>
+            <td width="33" valign="top">&nbsp;</td>
+            <td width="49" valign="top"><img src="http://enc-ticketing.org/tkt/images/img_caii/icon-3.jpg" alt="" width="40" height="53" /></td>
+            <td width="257" valign="top"><font style="font-family:Arial; font-size: 12px"><b style="font-size: 16px">Estacionamientos cercanos</b><br>
+              La CGR no cuenta con estacionamientos disponibles.</font></td>
+            <td width="44" valign="top" style="border-left: solid 1px #c2c2c2">&nbsp;</td>
+            <td width="223" valign="top"><font style="font-family:Arial; font-size: 14px"> <strong>Puede alquilar los siguientes:</strong><br>
+              <br>
+              </font> <a href="https://goo.gl/maps/hPXHTsaNz8E2" target="_blank"><img src="https://4.bp.blogspot.com/-J5pEGRa8cBM/WcrW9P5fqrI/AAAAAAAAEGs/EDxtjjhANJkFamIzs4qUUfZoq01a_Dj3QCLcBGAs/s1600/icon_1.jpg" alt="" width="65" height="50" /></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="https://goo.gl/maps/9FAZu81JCvz" target="_blank"><img src="https://2.bp.blogspot.com/-A5PVfnzR1Xc/WcrW9EXiaNI/AAAAAAAAEGw/fBLxeDzv5UM0lYV2T42ITvbzOyXAyfyIQCLcBGAs/s1600/icon_2.jpg" alt="" width="83" height="50" /></a></td>
+            <td width="17" valign="top">&nbsp;</td>
+            <td width="27" valign="top">&nbsp;</td>
+          </tr>
+        </tbody>
+      </table></td>
+  </tr>
+  <tr>
+    <td><br></td>
+  </tr>
+  <tr>
+    <td><br></td>
+  </tr>
+  <tr>
+    <td><img src="http://enc-ticketing.org/tkt/images/img_caii/line-2.jpg" alt="" width="278" height="32" /></td>
+  </tr>
+  <tr>
+    <td><br></td>
+  </tr>
+  <tr>
+    <td><table width="650" border="0" cellspacing="0" cellpadding="0">
+        <tbody>
+          <tr>
+            <td width="35" height="30px">&nbsp;</td>
+            <td colspan="2"><p><font style="font-family:Arial; font-size: 14px"><strong>Usted e</strong></font><font style="font-family:Arial; font-size: 14px"><strong>ligió los siguientes foros:</strong></font></p></td>
+            <td width="34">&nbsp;</td>
+            <td width="33">&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td width="99" align="center"><font style="font-family:Arial; font-size: 17px; color: #263783"><strong>06 DIC<br>
+              14:30 hrs.</strong></font></td>
+            <td width="449"><font style="font-family:Arial; font-size: 14px">FORO SELECCIONADO</font></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td width="99" align="center"><font style="font-family:Arial; font-size: 17px; color: #263783"><strong>07 DIC<br>
+              14:00 hrs.</strong></font></td>
+            <td width="449"><font style="font-family:Arial; font-size: 14px">FORO SELECCIONADO</font></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+        </tbody>
+      </table></td>
+  </tr>
+  <tr>
+    <td><br></td>
+  </tr>
+  <!--<tr>
+    <td align="center"><table width="550" height="50" border="0" cellspacing="0" cellpadding="0" style="background-color: #ECECEC">
+        <tbody>
+          <tr>
+            <td width="137">&nbsp;</td>
+            <td width="44">&nbsp;</td>
+            <td width="369">&nbsp;</td>
+          </tr>
+          <tr>
+            <td align="right"><img src="https://1.bp.blogspot.com/-A1nRqd_Ez-k/WhMrj43g9sI/AAAAAAAAFBU/WaOj0WG7MDkr9xdH3iBUgCZP8Hpmd8ihgCLcBGAs/s1600/icon_wifi.png" alt="" /></td>
+            <td>&nbsp;</td>
+            <td><font style="font-family: arial"><strong>Podrá tener acceso a WIFI<br>
+              Usuario: ENC -  Contraseña: Escuela123</strong></font></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+        </tbody>
+      </table></td>
+  </tr>
+  <tr>
+    <td><br></td>
+  </tr>-->
+  <tr>
+    <td><img src="http://enc-ticketing.org/tkt/images/img_caii/line-3.jpg" alt="" /></td>
+  </tr>
+  <tr>
+    <td colspan="3"><ul>
+        <br>
+        <li><font size="2" color="#000" face="Arial">Debe presentar su <strong>DNI</strong> junto con su <strong>GAFETE</strong> personalizado y presentarla en el módulo de registro</font> </li>
+        <li><font size="2" color="#000" face="Arial">Le agradeceremos mucho seguir las indicaciones de acreditación de asistencia para obtener su constancia de participación.</font></li>
+        <li><font size="2" color="#000" face="Arial">Si no puede asistir, por favor, pongase en contacto con nosotros a través de <a href="mailto:confirmaciones@enc.edu.pe" target="_blue">informes@enc.edu.pe</a> para disponer de la vacante.</font></li>
+      </ul></td>
+  </tr>
+  <tr>
+    <td><br></td>
+  </tr>
+  <tr height="8">
+    <td bgcolor="white" style="padding:30px 25px"><font size="2" color="#000" face="arial">¡Lo esperamos!<br>
+      <br>
+      Atentamente, <br>
+      <b style="font-size: 16px"><br>
+      Contraloría General de la República del Perú</b></font> <br></td>
+  </tr>
+</table>
+<table width="650" border="0" cellspacing="0" cellpadding="0" align="center">
+  <tbody>
+    <tr>
+      <td height="20px" style="border-bottom: solid 1px #CCC">&nbsp;</td>
+    </tr>
+  </tbody>
+</table>
+<!--<table width="650" border="0" cellspacing="0" cellpadding="0" align="center">
+  <tbody>
+    <tr>
+      <td width="27">&nbsp;</td>
+      <td width="150" height="30px"><font style="font-size: 14px; font-family: arial"><strong>Auspician</strong></font></td>
+      <td width="154">&nbsp;</td>
+      <td width="158">&nbsp;</td>
+      <td width="131">&nbsp;</td>
+      <td width="30">&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td><a href="https://pe.usembassy.gov/es/" target="_blank"><img src="http://enc-ticketing.org/tkt/images/img_caii/logo_eeuu.jpg" alt="" width="92" height="40" border="0" /></a></td>
+      <td><a href="http://www.iadb.org/es/banco-interamericano-de-desarrollo,2837.html" target="_blank"><img src="http://enc-ticketing.org/tkt/images/img_caii/logo_bid.jpg" alt="" border="0" /></a></td>
+      <td><a href="http://www.canadainternational.gc.ca/peru-perou/index.aspx?lang=spa" target="_blank"><img src="http://enc-ticketing.org/tkt/images/img_caii/logo_canada.jpg" alt="" width="92" height="40" border="0" /></a></td>
+      <td><a href="http://www.bancomundial.org/" target="_blank"><img src="http://enc-ticketing.org/tkt/images/img_caii/logo_bancomundial.jpg" alt="" width="92" height="40" border="0" /></a></td>
+      <td>&nbsp;</td>
+    </tr>
+  </tbody>
+</table>-->
+</body>
+</html>

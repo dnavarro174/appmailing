@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+</head>
+<body>
+<table align="center"  width="650" cellspacing="0">
+  <tr>
+    <td align="center"><img src="https://enc-ticketing.org/images/ev/banner-carta-compromiso.jpg?id=2" alt="Banner Escuela Nacional de Control" width="650" align="right"></td>
+  </tr>
+  <tr>
+    <td height="20px"></td>
+  </tr>
+  <tr>
+    <td height="20px" align="justify" style="padding:15px;">
+      <h2 style="font-size: 21px; font-family: arial;color:#000;">
+        {{$titulo}}
+      </h2>
+
+      <p style="font-size: 12px; font-family: arial;color:#000;">
+
+        Estimad@ {{$nombre}}<br><br>
+        Su Declaración jurada ha sido observada por el siguiente motivo:<br><br>
+        {{$mensaje}}
+        <br><br>
+        Agradeceremos realizar la subsanación de la DJ para continuar con el procedimiento
+        <br><br>
+      </p>
+      <p>
+        <a href="{{ $link }}" class="boton" style="padding: 10px;background: red;color:white;border:0;border-radius: 6px;">
+          CORREGIR OBSERVACIÓN
+        </a>
+      </p>
+
+      <p style="margin-top:40px;font-size: 10px; font-family: arial;color:#474747;line-height:18px;">
+        Este buzón no se encuentra activo, por favor no responder este mensaje. <br>
+        Si tienes alguna consulta puedes comunicarte a través de: <br>
+        Correo para consultas: <a href="mailto:informes@enc.edu.pe">informes@enc.edu.pe</a><br>
+        Whatsapp al <a href="https://wa.link/a27qgh">997 547 188</a><br>
+        Central telefónica: (01) 200-8430 - Anexo 4072 <br><br><br>
+  
+        <span style="color:#000;font-weight:bold;">Escuela Nacional de Control </span><br>
+        Formamos creadores de valor público
+        </p>
+      
+    </td>
+  </tr>
+  <tr>
+    <td height="20px"></td>
+  </tr>
+  
+  <tr>
+    <td height="20px"></td>
+  </tr>
+</table>
+
+
+<table align="center" width="650" border="0" cellspacing="0" cellpadding="0" bgcolor="#eaeaea" link="#ffffff" vlink="#ffffff" alink="#ffffff">
+      <tbody><tr>
+    <td width="32"></td>
+    <td width="261" style="border-top: solid 1px #fff"><img src="https://enc-ticketing.org/tktv2/public/images/img_planhtml/copy_ENC.png" target="_blank" width="261" height="39" alt=""></td>
+    <td width="153" style="border-top: solid 1px #fff" align="center"><a href="https://www.enc.edu.pe/" target="_blank"><img src="https://enc-ticketing.org/tktv2/public/images/img_planhtml/logo_ENC.jpg" alt="" width="120" height="71"></a></td>
+    <td width="182" style="border-top: solid 1px #fff"><a href="https://www.contraloria.gob.pe/wps/portal/portalcgrnew/siteweb/inicio/" target="_blank"><img src="https://enc-ticketing.org/tktv2/public/images/img_planhtml/logo_CGR.png" alt="" width="170" height="44"></a></td>
+    <td width="22">&nbsp;</td>
+  </tr>
+    </tbody></table>
+</body>
+</html>

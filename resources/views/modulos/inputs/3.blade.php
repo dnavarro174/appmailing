@@ -1,0 +1,26 @@
+@isset($input)
+    <input type="number" class="form-control" name="inputs[{{$input->id}}]" value="{{$input->value}}" id="inp-{{$input->id}}"
+           placeholder="Ingrese {{$input->title}}" {{$input->required?"required":""}} />
+@else
+    @isset($js_form)
+        <div class="${opt.cls}">
+            <div class="form-group">
+                <label for="inp-${opt.id}" class="${opt.clsh}">${opt.title} <span class="text-danger">${opt.req}</span></label>
+                <div>${opt.subtitle}</div>
+                <input type="number" class="form-control" name="${opt.name}" value="${opt.name}" id="inp-${opt.id}" placeholder="Ingrese ${opt.title}" />
+                <small class="form-text text-muted">${opt.note}</small>
+            </div>
+        </div>
+    @else
+        <div class="form-group row">
+            <label for="inp-${opt.id}" class="col-sm-12 col-md-4 col-lg-2 col-form-label d-block">
+                <div class="h4">${opt.title}<span class="text-danger">${opt.req}</span></div>
+                <div>${opt.subtitle}</div>
+            </label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" name="${opt.name}" value="${opt.name}" id="inp-${opt.id}" placeholder="Ingrese ${opt.title}" />
+                <small class="form-text text-muted">${opt.note}</small>
+            </div>
+        </div>
+    @endif
+@endif

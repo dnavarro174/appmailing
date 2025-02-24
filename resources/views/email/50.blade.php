@@ -1,0 +1,1 @@
+50p_conf_registro

@@ -1,0 +1,344 @@
+@extends('layout.home')
+
+@section('content')
+
+<div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+
+    @include('layout.nav_superior')
+    <!-- end encabezado -->
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_settings-panel.html -->
+      
+      <div class="main-panel">
+        
+        <div class="content-wrapper p-0 mt-3">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title text-transform-none">Mailing</h4>
+              
+
+              <div class="row" id="capBusqueda">
+                <div class="col-sm-12">
+                  <form>
+                    <div class="form-row">
+                      <div class=" col-sm-4 col-xs-12">
+                        <input type="text" class="form-control" placeholder="BUSCAR" name="s" value="">{{-- @if(isset($_GET['s'])){{$_GET['s']}}@endif --}}
+
+                        <?php if (isset($_GET['s'])){ ?>
+                            <a class="ml-2 small btn-cerrar h4" title="Borrar busqueda" href=' {{route('mailing.index')}} '><i class='mdi mdi-close text-lg-left'></i></a>
+                        <?php } ?>
+
+                      </div>
+                      
+                      <div class=" col-sm-2 col-xs-12">
+                        <select class="form-control" name="g" id="filter-by-date" onchange="submit();">
+                          <option selected="selected" value="">GRUPOS</option>
+                          @foreach($tipos as $tipo)
+                          <option value="{{$tipo->nombre}}">{{$tipo->nombre }}</option>
+                          @endforeach
+                        </select>
+                      </div>
+                      <div class=" col-sm-2 col-xs-12">
+                        <select class="form-control" name="p" id="filter-by-date" onchange="submit();">
+                          <option selected="selected" value="">PAÍS</option>
+                          <option value="PERÚ">PERÚ</option>
+                          @foreach($paises as $pais)
+                          <option value="{{$pais->name}}">{{$pais->name }}</option>
+                          @endforeach
+                        </select>
+                      </div>
+                      <div class=" col-sm-2 col-xs-12">
+                        <select class="form-control" name="d" id="filter-by-date" onchange="submit();">
+                          <option selected="selected" value="">DEPARTAMENTOS</option>
+                          <option value="LIMA">LIMA</option>
+                          @foreach($departamentos_datos as $dep)
+                          <option value="{{$dep->nombre}}">{{$dep->nombre }}</option>
+                          @endforeach
+                        </select>
+                      </div>
+
+                      <div class=" col-sm-2 col-xs-12">
+                        <button type="submit" class="form-control btn btn-dark mb-2 " id="buscar">BUSCAR</button>
+                        <select onchange="submit()" class="form-control" name="pag" id="pag">
+                          @if(isset($_GET['pag']))
+                          <option value="15" @if(($_GET['pag'] == 15)) selected="" @endif>15</option>
+                          <option value="20" @if(($_GET['pag'] == 20)) selected="" @endif>20</option>
+                          <option value="30" @if(($_GET['pag'] == 30)) selected="" @endif>30</option>
+                          <option value="50" @if(($_GET['pag'] == 50)) selected="" @endif>50</option>
+                          <option value="100" @if(($_GET['pag'] == 100)) selected="" @endif>100</option>
+                          <option value="500" @if(($_GET['pag'] == 500)) selected="" @endif>500</option>
+                          @else
+                          <option value="15">15</option><option value="20">20</option><option value="30" >30</option><option value="50" >50</option><option value="100">100</option><option value="500">500</option>{{-- <option value="-1" >Todos</option> --}}
+                          @endif
+                        </select>
+                        
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+
+
+              @if(Session::has('message-import'))
+              <p class="alert alert-info">{{ Session::get('message-import') }}</p>
+              @endif
+
+              
+              
+              <div id="capaEstudiantes" class="row">
+
+                {{--<div class="col-xs-12 col-sm-6 col-lg-6 form-inline">
+
+                     {{ Form::open(array('route' => array('estudiantes.enviar_email'), 'method' => 'GET', 'role' => 'form', 'id' => 'search','style'=>'display:flex')) }}
+
+                    <div class="form-group">
+                      <label for="prog" class="mr-2">Cod. Programación: </label>
+                        <select class="form-control border-primary text-uppercase valid" id="prog" name="prog" >
+                          <option value="">SELECCIONE</option>
+                          @foreach ($programacion_datos as $prog)
+                            <option value="{{$prog->codigo}}"
+                              @if($prog->codigo === $proga)
+                              selected
+                              @endif
+                              >{{$prog->codigo}}</option>
+                          @endforeach
+                        </select>
+                    </div>
+                    
+                    <div class="form-group mx-sm-3">
+                        <select class="form-control border-primary text-uppercase valid" id="depa" name="depa" >
+                          <option value="">DEPARTAMENTO</option>
+                          @foreach ($departamentos_datos as $depa)
+                          <option value="{{$depa->ubigeo_id}}"
+                            @if($depa->ubigeo_id === $depas)
+                              selected
+                            @endif
+                            >{{$depa->nombre}}</option>
+                          @endforeach
+
+                        </select>
+                    </div>
+                    <div class="form-group">
+                      <button type="submit" class="btn btn-primary"  id="filtrar">Filtrar</button>
+                      @if($proga or $depas) 
+                        <div class="form-group mx-sm-3">
+                        <a href="{{ route('estudiantes.enviar_email')}}">Borrar busqueda</a>
+                      </div>
+                      @endif
+                    </div>
+    
+                    {{ Form::close() }}  
+                  </div>--}}
+
+                  <div class="col-xs-12 col-sm-12 text-right mb-4">
+                      <span class="small pull-left">
+                        <strong>Mostrando</strong>
+                        {{ $estudiantes_datos->firstItem() }} - {{ $estudiantes_datos->lastItem() }} de
+                        {{ $estudiantes_datos->total() }}
+                      </span>
+
+                    </div>{{-- end izq --}}
+
+                
+                  
+                {{-- end buscador --}}
+
+
+              <div class="col-12">
+                <form  action="{{route('mailing.store')}}" method="POST" id="form_html" style="display: inline;">
+
+                  @csrf
+                  
+
+                <div class="row">
+                  <div class="col-xs-12 col-sm-3 mb-4">
+                    <div class="col-xs-12 col-sm-12 col-lg-12">
+                      <h4 class="card-title mt-0">Plantillas <a class="btn btn-link" href="{{ route('plantillaemail.create') }}">Crear HTML</a></h4>
+                      <div class="bloque_plantilla border  mb-4 pt-2" style="height: 300px;overflow-x: auto;overflow-y: auto; ">
+                        <ul class="">
+                          @foreach ($plantilla_datos as $datos)
+                          <li>
+                            <a href="#1" id="{{ $datos->id }}">
+                              <input type="radio" class="form btn-html" name="checkHTML" value="{{ $datos->id }}" data-xid="{{ $datos->id }}" >
+                                <span class="openHTML" data-id="{{ $datos->id }}">{{ $datos->nombre }}
+                                  {{-- <em class="color-gris text-small" style="font-size: 10px;display: block;">{{ $datos->flujo_ejecucion }}</em> --}}</span>
+                            </a>
+                          </li>
+                          @endforeach
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-lg-12">
+                        {{-- <div class="col-sm- form-group">
+                          <label class=" col-form-label">
+                              <input type="checkbox" id="chek_enviarTodos" name="chek_enviarTodos" value="1" ><span id="spanConceder"> Enviar a toda la base de datos</span>
+                          </label>
+                        </div> --}}
+                        <button type="submit" class="btn btn-dark" name="enviarCorreos" id="enviarCorreos">Enviar Correos</button>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-9 mb-4">
+                    <div class="table-responsive fixed-height" style="height: 500px; padding-bottom: 49px;">{{-- table-responsive-lg --}}{{--  --}}
+                        <table id="order-listing" class="table table-hover table-sm">
+                          <thead class="thead-dark">
+                            <tr role="row">
+                              <th style="width: 2%;"><input type="checkbox" name="chooseAll_1" id="chooseAll_1" class="chooseAll_1"></th>
+                              <th style="width: 3%;"></th>
+                              {{-- <th style="width: 2%;">#</th> --}}
+                              <th style="width: 8%;">DNI</th>
+                              <th style="width: 25%;">Apellidos_y_Nombres</th>
+
+                              <th style="width: 10%;">Cargo</th>
+                              <th style="width: 10%;">Entidad</th>
+                              <th style="width: 10%;">Profesión</th>
+                              <th style="width: 10%;">Grupo</th>
+                              <th style="width: 10%;">País</th>
+                              <th style="width: 10%;">Departamento</th>
+                              {{-- <th style="width: 5%;">Registrado</th> --}}
+                              @if(@isset($permisos['eliminar']['permiso']) and  $permisos['eliminar']['permiso'] == 1)
+                              <th style="width: 5%;">Celular</th>
+                              <th style="width: 5%;">Email</th>
+                              @endif
+                              <th style="width: 5%;">FechaReg</th>
+                              <th style="width: 3%;">Estado</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            
+                            @foreach ($estudiantes_datos as $datos)
+                            <tr role="row" class="odd" <?php if($datos->dtrack == "SI") echo "style='background:#a0e8c5;'"?> <?php if($datos->dtrack == "NO") echo "style='background:#f7d3d3;'"?>>
+                              
+                              <td><input type="checkbox" class="form btn-delete _check" name="tipo_doc[]" value="{{ $datos->id }}" data-id="{{ $datos->id }}"></td>
+                              <td nowrap="">
+                                  @if(@isset($permisos['mostrar']['permiso']) and  $permisos['mostrar']['permiso'] == 1)
+                                  <a href="{{ route('leads.show',$datos->id)}}" class="">
+                                    <i class="mdi mdi-eye text-primary icon-md" title="Mostrar"></i>
+                                  </a>
+                                  @endif
+                                    @if(@isset($permisos['editar']['permiso']) and  $permisos['editar']['permiso'] == 4){{-- 1 --}}
+                                    <a href="#" class="asignarProg" data-id="{{ $datos->dni_doc }}">
+                                      <i class="mdi mdi-menu text-secondary icon-md"></i>
+                                    </a>
+                                    @endif
+                                  {{-- <form style="display: inline;" method="POST" action="{{ route('leads.destroy', $datos->id)}}">
+                                    {!! csrf_field() !!}
+                                    {!! method_field('DELETE') !!}
+                                    <button type="submit" class="button_submit" title="Eliminar"><img src="images/ico/trash.png" class="acciones" width="14" alt="edit icono"></button>
+                                  </form> --}}
+                                </td>
+                                <td>
+                                  @if(@isset($permisos['editar']['permiso']) and  $permisos['editar']['permiso'] == 1)
+                                    <a href="{{route('leads.edit', $datos->id)}}" class="btn btn-link p-0"> 
+                                    {{ $datos->dni_doc }}
+                                    </a>
+                                  @else
+                                    {{ $datos->dni_doc }}
+                                  @endif
+                                </td> {{-- onclick="openModal()" --}}
+                                <td>{{ $datos->ap_paterno .' '. $datos->ap_materno .', '. $datos->nombres }}</td>
+                                <td>{{ str_limit($datos->cargo, 25) }}</td>
+                                <td>{{ str_limit($datos->organizacion, 25) }}</td>
+                                <td>{{ str_limit($datos->profesion, 25) }}</td>
+                                {{-- <td> {{ $datos->departamento->nombre, '' }} </td> --}}
+                                <td> {{ $datos->grupo, '' }} </td>
+                                <td> {{ $datos->pais, '' }} </td>
+                                <td> {{ $datos->region, '' }} </td>
+                                
+                                {{-- <td class="text-center">{{ $datos->daccedio }}</td> --}}
+                                @if(@isset($permisos['eliminar']['permiso']) and  $permisos['eliminar']['permiso'] == 1)
+                                <td>{{ $datos->codigo_cel." ".$datos->celular }}</td>
+                                <td>{{ $datos->email }}</td>
+                                @endif
+                                {{-- <td>{{ $datos->created_at->toFormattedDateString() }}</td> --}}
+                                {{-- <td>{{ $datos->created_at->diffForHumans() }}</td> --}}
+
+                                <td>{{ $datos->created_at->format('d.m.Y') }}</td>
+                                <td class="text-center">
+                                  @if($datos->estado == 0)
+                                    <i class="mdi mdi-account-circle text-secondary h4" title="Inactivo"></i>
+                                  @else
+                                    <i class="mdi mdi-account-circle text-success h4" title="Activo"></i>
+                                  @endif
+                                </td>
+
+                                
+                                
+                            </tr>
+                            @endforeach
+
+                          </tbody>
+                        </table>
+
+
+                        {!! $estudiantes_datos->appends(request()->query())->links() !!}
+                      </div>
+                  </div>
+                  {{-- <div class="col-xs-12 col-sm-6">eeeee</div>
+                  <div class="col-xs-12 col-sm-6">eeeee</div> --}}
+                </div>
+               
+              
+
+                 {{-- end close form --}}
+                </form>
+
+
+                  {{-- modal openHTML --}}
+                  <div class="modal fade ass" id="openHTML" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-800" role="document">
+                      <div class="modal-content">
+                        
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Plantilla HTML</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span> 
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="row" id="plantillaHTML">
+                          </div>
+
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        </div>
+                        
+
+
+                      </div>
+                    </div>
+                  </div>
+                  {{-- modal openHTML --}}
+              </div>
+
+
+              </div> {{-- end cap_form_list --}}
+
+              
+            </div>
+          </div>
+        </div> <!-- end listado table -->
+
+        <!-- content-wrapper ends -->
+        <!-- partial:partials/_footer.html -->
+        @include('layout.footer')
+        <!-- end footer.php -->
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+
+
+<style>
+.bloque_plantilla ul li {
+    list-style: none;
+}
+</style>
+
+@endsection

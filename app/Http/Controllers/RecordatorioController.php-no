@@ -1,0 +1,188 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Estudiante;
+use DB;
+use Carbon\Carbon;
+
+class RecordatorioController extends Controller
+{
+    
+    public function recordatorio($id,$modulo)
+    {
+        //return $modulo;
+        $msg = '';
+        $msg_tit = "Error";
+        $msg_tipo = "error";
+
+        $n_datos = DB::table('eventos as e')
+                            ->join('e_plantillas as p', 'e.id', '=', 'p.eventos_id')
+                            ->join('e_formularios as f', 'e.id', '=', 'f.eventos_id')
+                            ->where('e.id',$id)
+                            ->count();
+        if($n_datos == 0){
+            $msg = "El evento no tiene plantilla o formulio.";
+            $respuesta = array(
+                    'msg'   => $msg,
+                    'msg_tit'=> $msg_tit,
+                    'tipo'  => $msg_tipo
+            );
+
+            return $respuesta;
+        }
+
+        $existePlantVirtual = DB::table('e_plantillas_virtual')->where('eventos_id',session('eventos_id'))->count();
+        if($existePlantVirtual==1){
+            $rs_datos = \App\Evento::join('e_plantillas as p', 'eventos.id', '=', 'p.eventos_id')
+                            ->join('e_formularios as f', 'eventos.id','=','f.eventos_id')
+                            ->join('e_plantillas_virtual as vir', 'eventos.id','=','vir.eventos_id')
+                            ->where('eventos.id',$id)
+                            ->orderBy('eventos.id', 'desc')
+                            ->first();
+                            
+        }else{
+            $rs_datos = \App\Evento::join('e_plantillas as p', 'eventos.id', '=', 'p.eventos_id')
+                            ->join('e_formularios as f', 'eventos.id','=','f.eventos_id')
+                            ->where('eventos.id',$id)
+                            ->orderBy('eventos.id', 'desc')
+                            ->first();
+        }
+
+        #TERMINARON PROCESO
+        $estudiantes = Estudiante::join('estudiantes_act_detalle as de','estudiantes.dni_doc','=','de.estudiantes_id')
+                        ->where('de.eventos_id', $id)
+                        ->where('de.daccedio','SI')#terminaron proceso
+                        ->where('de.dtrack','SI')#aceptaron su  inscripcion
+                        ->where('de.modalidad_id',2) #solo presencial
+                        ->select('estudiantes.id','estudiantes.dni_doc','estudiantes.nombres','estudiantes.ap_paterno','estudiantes.ap_materno','estudiantes.cargo','estudiantes.organizacion','estudiantes.profesion','estudiantes.grupo','estudiantes.pais','estudiantes.region','estudiantes.codigo_cel','estudiantes.celular','de.daccedio','estudiantes.created_at','de.dtrack','de.estudiantes_tipo_id','de.estado','estudiantes.email','de.modalidad_id')->get();
+        $tpo_proceso = 1;
+        $n_estudiantes = count($estudiantes);
+
+        if($n_estudiantes == 0){
+            $msg = "El evento no tiene participantes.";
+            $respuesta = array(
+                    'msg'   => $msg,
+                    'msg_tit'=> $msg_tit,
+                    'tipo'  => $msg_tipo
+            );
+            return $respuesta;
+        }
+
+        $f_limite = \Carbon\Carbon::parse($rs_datos->fechaf_evento);
+
+        $hoy = Carbon::now();
+
+        // CIERRE DE FORM LOGIN INSCRITOS
+        //if($hoy >= $f_limite){
+        if($hoy->greaterThan($f_limite)){
+
+            $msg = "El evento ya ha finalizado.";
+            $respuesta = array(
+                    'msg'   => $msg,
+                    'msg_tit'=> $msg_tit,
+                    'tipo'  => $msg_tipo
+            );
+
+            return $respuesta;
+        }
+
+        foreach ($estudiantes as $rs_estudiante) {
+
+                $modalidad = $rs_estudiante->modalidad_id;
+                
+                $rs_estudiante = [
+                    'email'     => $rs_estudiante->email,
+                    'dni_doc'   => $rs_estudiante->dni_doc,
+                    'nombres'   => $rs_estudiante->nombres ." ".$rs_estudiante->ap_paterno,
+                    'ap_paterno'=> '',
+                    'ap_materno'=> '',
+                    'celular'   => $rs_estudiante->celular,
+                    'codigo_cel'=> $rs_estudiante->codigo_cel,
+                ];
+                $rs_estudiante = (object) $rs_estudiante;
+
+                $xtipo = 'p_recordatorio';
+                $flujo_ejecucion = 'RECORDATORIO';
+                $mod_desde = "RECORD_TERMINARON";
+                $mod_desde = "RECORD_VIRTUALES";
+                $evento = $id;//ID EVENTO
+                
+                creaHitoria_email($modalidad, $rs_estudiante, $rs_datos,$xtipo,$evento,$flujo_ejecucion,$mod_desde);
+                #DD($rs_datos->p_recordatorio_email,$rs_datos->p_recordatorio_msg,$rs_datos->p_recordatorio_f);
+
+        }
+        $n=0;
+        $noterminaron = 0;
+        $total = $n_estudiantes;
+        # NO TERMINARON PROCESO
+        /*
+        $restudiantes = Estudiante::join('estudiantes_act_detalle as de','estudiantes.dni_doc','=','de.estudiantes_id')
+            ->where('de.eventos_id', $id)
+            ->where('de.daccedio','NO')#aun no registra sus actividades
+            ->where('de.dtrack','SI')#aceptaron su inscripcion
+            ->select('estudiantes.id','estudiantes.dni_doc','estudiantes.nombres','estudiantes.ap_paterno','estudiantes.ap_materno','estudiantes.cargo','estudiantes.organizacion','estudiantes.profesion','estudiantes.grupo','estudiantes.pais','estudiantes.region','estudiantes.codigo_cel','estudiantes.celular','de.daccedio','estudiantes.created_at','de.dtrack','de.estudiantes_tipo_id','de.estado','estudiantes.email','de.modalidad_id')->get();
+
+        $n = count($restudiantes);
+
+        $noterminaron = $n?$n:0;
+        $total = $n_estudiantes + $noterminaron;
+
+            foreach ($restudiantes as $rs_estudiante) {
+    
+                $modalidad = $rs_estudiante->modalidad_id;
+                
+                $rs_estudiante = [
+                    'email'     => $rs_estudiante->email,
+                    'dni_doc'   => $rs_estudiante->dni_doc,
+                    'nombres'   => $rs_estudiante->nombres ." ".$rs_estudiante->ap_paterno,
+                    'ap_paterno'=> '',
+                    'ap_materno'=> '',
+                    'celular'   => $rs_estudiante->celular,
+                    'codigo_cel'=> $rs_estudiante->codigo_cel,
+                ];
+                $rs_estudiante = (object) $rs_estudiante;
+    
+                $xtipo = 'p_recordatorio';
+                $flujo_ejecucion = 'RECORDATORIO';
+                $mod_desde = "RECORD_NOTERMINARON";
+                $evento = $id;//ID EVENTO
+                
+                creaHitoria_email($modalidad, $rs_estudiante, $rs_datos,$xtipo,$evento,$flujo_ejecucion,$mod_desde);
+                
+            }
+        */
+
+
+        if($rs_datos->p_recordatorio_msg == 0){
+            $msg="No esta habilitado la CONFIRMACIÓN POR WHATS";
+            $msg_tipo = "warning"; 
+            $msg_tit = "Recordatorio";
+        }else{
+            #$msg="Cantidad de correos enviados: $n_estudiantes.";
+            $msg="Enviados a los que terminaron su inscripción:". $n_estudiantes. "\n Enviados a los que no terminaron su inscripción:". $noterminaron ."\n Total enviados: ".$total;
+            $msg_tipo = "success"; 
+            $msg_tit = "Recordatorio Enviado";
+        }
+        if($rs_datos->p_recordatorio_email == 0){
+            $msg .=" No esta habilitado la CONFIRMACIÓN POR EMAIL";
+            $msg_tipo = "warning"; 
+            $msg_tit .= " Recordatorio";
+        }else{
+            $msg="Enviados a los que terminaron su inscripción:". $n_estudiantes. "\n Enviados a los que no terminaron su inscripción:". $noterminaron ."\n Total enviados: ".$total;
+            $msg_tipo = "success"; 
+            $msg_tit = "Recordatorio Enviado";
+        }
+
+
+        $respuesta = array(
+            'msg'   => $msg,
+            'msg_tit'=> $msg_tit,
+            'tipo'  => $msg_tipo
+        );
+
+        return $respuesta;
+    }
+    
+}
